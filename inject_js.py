@@ -39,11 +39,11 @@ global_modals = """
         <div class="space-y-4">
             <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
                 <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="material-symbols-outlined">vaccines</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Add Product</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new product to inventory</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Add Medicine</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Register a new medicine to inventory</p>
                 </div>
             </a>
             <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
@@ -51,7 +51,7 @@ global_modals = """
                     <span class="material-symbols-outlined">local_shipping</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Create Delivery</h3>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Supplier Delivery</h3>
                     <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
                 </div>
             </a>
@@ -60,8 +60,8 @@ global_modals = """
                     <span class="material-symbols-outlined">receipt_long</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-tertiary transition-colors">Create Receipt</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Receive new stock from suppliers</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Dispense / Sale</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Record pharmacy sales or dispatch</p>
                 </div>
             </a>
         </div>

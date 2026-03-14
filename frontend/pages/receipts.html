@@ -1,416 +1,224 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CoreInventory - Incoming Receipts</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSync | Pharma Dispense Workflow</title>
+    <!-- Tailwind CSS with custom configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="../css/core-theme.css" rel="stylesheet">
     <script src="../js/tailwind-config.js"></script>
 </head>
-<body class="flex min-h-screen animate-fade-in bg-background text-on-surface selection:bg-primary selection:text-white" data-page="receipts">
-
-<!-- SideNavBar -->
-<aside class="w-64 glass-panel border-r border-outline-variant text-on-surface flex flex-col fixed h-full z-30">
-    <div class="px-6 py-8">
-        <div class="flex items-center gap-4 mb-10 hover-lift cursor-pointer">
-            <div class="w-12 h-12 primary-gradient rounded-xl flex items-center justify-center shadow-glow">
-                <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
-            </div>
-            <div>
-                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">CoreData</h1>
-                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Foundry System</p>
-            </div>
-        </div>
-        <nav class="space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="dashboard.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
-                <span class="text-sm">Dashboard</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="products.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
-                <span class="text-sm">Inventory</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="deliveries.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
-                <span class="text-sm">Orders</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high text-white font-medium shadow-md border border-outline-variant" href="#">
-                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
-                <span class="text-sm">Suppliers</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">assessment</span>
-                <span class="text-sm">Reports</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
-                <span class="text-sm">Settings</span>
-            </a>
-        </nav>
-    </div>
-    <div class="mt-auto px-6 py-6 border-t border-outline-variant">
-        <button data-modal-target="add-new-modal" class="w-full btn-primary-gradient text-white py-3.5 rounded-xl text-sm font-bold mb-6 hover-lift flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-sm">add</span> Add New Item
-        </button>
-        <div class="space-y-1">
-            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
-                <span class="material-symbols-outlined text-sm">help_outline</span> Support
-            </a>
-            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
-                <span class="material-symbols-outlined text-sm">logout</span> Logout
-            </a>
-        </div>
-    </div>
-</aside>
-
-<!-- Main Content Area -->
-<main class="flex-1 ml-64 bg-background min-h-screen">
-    <!-- TopNavBar -->
-    <header class="sticky top-0 z-20 glass-header px-8 h-20 flex items-center justify-between">
-        <div class="relative flex items-center bg-surface-container-low px-4 py-2.5 rounded-2xl w-[400px] border border-outline-variant focus-within:ring-2 ring-primary transition-all">
-            <span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
-            <input id="global-search-input" class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/60 text-white ml-2 outline-none" placeholder="Search items, orders, or suppliers..." type="text" autocomplete="off" />
-            <div class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] text-on-surface-variant font-mono">⌘K</div>
-            <!-- Search Results Dropdown -->
-            <div id="global-search-results" class="hidden absolute top-full left-0 right-0 mt-3 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl overflow-hidden z-[100] max-h-96 overflow-y-auto custom-scrollbar"></div>
-        </div>
-        <div class="flex items-center gap-6">
-            <div class="flex items-center gap-4 text-on-surface-variant">
-                <button class="relative hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
-                    <span class="material-symbols-outlined">notifications</span>
-                </button>
-                <button data-toggle-activity class="hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
-                    <span class="material-symbols-outlined">history</span>
-                </button>
-            </div>
-            <div class="h-8 w-[1px] bg-outline-variant"></div>
-            <div class="relative"><div data-dropdown-toggle="profile-dropdown" class="flex items-center gap-4 cursor-pointer hover:bg-surface-container-low p-1.5 pr-4 rounded-full transition-colors border border-transparent hover:border-outline-variant">
-                <img alt="Manager Profile" class="w-9 h-9 rounded-full bg-surface-container-highest object-cover ring-2 ring-primary ring-offset-2 ring-offset-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlDGZGcFNjAo2U47yvm_pBV91RDFQ_Q55ynzmviajhlYVyyR4enLnveKQyI6iZk4K3pB9lSPubjvdDwu7oufzUPn66qfF1KMDQ9cSZDAB-gjbhMsKArF4CurmjGDhRVay8IvW3IuFQG1cYl3Lj8s3jJ0JaNF-Cj_nN8xLMgmhfvGh4c067JOEcDkeeX1yd1hqYrxc7LEfEJbILIvPuYhh3vvoGpIGcvcEtBTL3VhAdYh-w5KAIwYNC7YYeSSodT6PwXqwwctSMbZMp"/>
-                <div class="text-left hidden md:block">
-                    <p class="text-sm font-bold text-white leading-none">Alex Sterling</p>
-                    <p class="text-[10px] text-on-surface-variant mt-1 font-medium uppercase tracking-wider">Manager Profile</p>
+<body class="bg-surface font-sans text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar Navigation (Same as Dashboard) -->
+        <aside class="w-72 bg-surface-container border-r border-outline-variant flex flex-col z-30 transition-all duration-300">
+            <!-- Brand Logo -->
+            <div class="p-8 flex items-center space-x-3">
+                <div class="h-10 w-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <i class="fas fa-prescription text-on-primary text-xl"></i>
                 </div>
-                <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
-            </div>
-            <!-- Profile Dropdown -->
-            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
-                <div class="py-2">
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-                    </a>
-                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
-                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
-                    </a>
-                </div>
-            </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Workspace -->
-    <div class="px-8 py-8 space-y-8 animate-fade-in max-w-[1600px] mx-auto">
-        <!-- Breadcrumbs & Header -->
-        <div class="flex justify-between items-end mb-6">
-            <div>
-                <div class="flex items-center gap-2 text-on-surface-variant text-sm mb-3">
-                    <span class="hover:text-white cursor-pointer transition-colors">Purchase</span>
-                    <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">Incoming Receipts</span>
-                </div>
-                <h2 class="text-4xl font-headline font-extrabold tracking-tight text-white glow-text">Incoming Receipts</h2>
-            </div>
-            <div class="flex gap-3">
-                <button class="px-5 py-2.5 bg-surface-container-low text-white border border-outline-variant hover:border-primary transition-colors hover:text-primary rounded-xl text-sm font-semibold hover-lift hover:bg-surface-container-high shadow-md">Export Report</button>
-            </div>
-        </div>
-
-        <!-- Main Layout Grid -->
-        <div class="grid grid-cols-12 gap-8 pb-10">
-            <!-- Create New Receipt Form -->
-            <div class="col-span-12 lg:col-span-8 space-y-8">
-                <div class="glass-panel p-8 rounded-3xl shadow-soft">
-                    <div class="flex items-center gap-4 mb-10">
-                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary border border-primary/30 shadow-glow">
-                            <span class="material-symbols-outlined">post_add</span>
-                        </div>
-                        <h3 class="text-2xl font-headline font-bold text-white tracking-tight">Create New Receipt</h3>
-                    </div>
-
-                    <form id="receipt-form" class="space-y-8">
-                        <!-- Supplier & Warehouse Info -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="space-y-3">
-                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Supplier</label>
-                                <div class="relative group">
-                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">person</span>
-                                    <input id="supplier-name" class="bg-surface-container-low border border-outline-variant rounded-xl w-full px-12 py-4 text-white focus:ring-2 focus:ring-primary outline-none transition-all group-hover:border-primary/50 placeholder:text-on-surface-variant/50 font-medium" placeholder="Select supplier..." type="text"/>
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Destination Hub</label>
-                                <div class="relative group">
-                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">warehouse</span>
-                                    <select id="destination-hub" class="bg-surface-container-low border border-outline-variant rounded-xl w-full px-12 py-4 text-white focus:ring-2 focus:ring-primary outline-none transition-all group-hover:border-primary/50 appearance-none font-medium cursor-pointer">
-                                        <option value="WH/Stock">North Logistics Hub - A1</option>
-                                        <option value="WH/Input">Central Distribution Center</option>
-                                        <option value="WH/Regional">Eastern Regional Warehouse</option>
-                                    </select>
-                                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Expected Date</label>
-                                <div class="relative group">
-                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">calendar_today</span>
-                                    <input id="receive-date" class="bg-surface-container-low border border-outline-variant rounded-xl w-full px-12 py-4 text-white focus:ring-2 focus:ring-primary outline-none transition-all group-hover:border-primary/50 appearance-none font-medium" type="date"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product List Table -->
-                        <div class="space-y-5 pt-4">
-                            <div class="flex items-center justify-between pl-1">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Product Manifest</h4>
-                                <button id="add-row-btn" class="bg-primary/10 hover:bg-primary/20 text-primary text-[11px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-primary/30 transition-all flex items-center gap-2" type="button">
-                                    <span class="material-symbols-outlined text-[18px]">add</span> Add Line Item
-                                </button>
-                            </div>
-                            
-                            <div class="bg-surface-container-low/50 border border-outline-variant rounded-2xl overflow-hidden">
-                                <div class="overflow-x-auto custom-scrollbar">
-                                    <table class="w-full text-left">
-                                        <thead>
-                                            <tr class="text-[11px] uppercase tracking-widest text-on-surface-variant font-bold bg-surface-container-lowest/50 border-b border-outline-variant">
-                                                <th class="px-6 py-4">Product Name</th>
-                                                <th class="px-6 py-4">SKU / Batch</th>
-                                                <th class="px-6 py-4 text-right">Quantity</th>
-                                                <th class="px-6 py-4 text-center">Unit</th>
-                                                <th class="px-6 py-4"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="manifest-table-body" class="divide-y divide-outline-variant">
-                                            <!-- Rows will be injected by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer Actions -->
-                        <div class="flex items-center justify-between pt-8 mt-8 border-t border-outline-variant">
-                            <div class="flex items-center gap-2 text-on-surface-variant text-sm font-medium">
-                                <span class="material-symbols-outlined text-[18px] text-secondary animate-pulse-slow">cloud_done</span>
-                                <span id="save-status">Draft auto-saved 2 mins ago</span>
-                            </div>
-                            <div class="flex gap-4">
-                                <button id="save-draft-btn" class="px-6 py-3.5 glass-panel border border-outline-variant hover:border-white transition-colors text-white rounded-xl text-[15px] font-bold hover-lift hover:bg-surface-container-high" type="button">
-                                    Save Draft
-                                </button>
-                                <button id="validate-receipt-btn" class="px-8 py-3.5 btn-primary-gradient text-white rounded-xl text-[15px] font-bold hover-lift flex items-center gap-2" type="button">
-                                    Validate Receipt <span class="material-symbols-outlined text-[20px]">task_alt</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div>
+                    <h1 class="text-xl font-headline font-black tracking-tight text-on-surface leading-none">MEDISYNC</h1>
+                    <p class="text-[10px] font-bold tracking-[0.2em] text-primary/60 mt-1 uppercase">Pharma Nexus</p>
                 </div>
             </div>
 
-            <!-- Right Sidebar Columns -->
-            <div class="col-span-12 lg:col-span-4 space-y-8">
-                <!-- Recent Activity Grid -->
-                <div class="glass-panel p-6 rounded-3xl border border-outline-variant h-[450px] flex flex-col hover-lift">
-                    <div class="flex items-center justify-between mb-6 border-b border-outline-variant/50 pb-4">
-                        <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Recent Receipts</h3>
-                        <button class="text-primary text-xs font-bold hover:underline bg-primary/10 px-2 py-1 rounded">View All</button>
-                    </div>
-                    
-                    <div id="recent-receipts-list" class="space-y-4 flex-1 overflow-y-auto custom-scrollbar pr-2">
-                        <!-- Card 1 -->
-                        <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-secondary/20 shadow-sm hover:border-secondary/50 transition-colors group cursor-pointer relative overflow-hidden">
-                            <div class="absolute right-0 top-0 w-16 h-16 bg-secondary/10 rounded-bl-full group-hover:bg-secondary/20 transition-colors"></div>
-                            <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92831</span>
-                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/30 uppercase tracking-widest glow-text">Validated</span>
-                            </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Global Parts Inc.</h4>
-                            <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
-                                <span class="flex items-center gap-1.5 text-white/70">
-                                    <span class="material-symbols-outlined text-[14px]">schedule</span> Today, 10:45 AM
-                                </span>
-                                <span class="font-bold text-white bg-surface-container-highest px-2 py-0.5 rounded">24 Items</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Card 2 -->
-                        <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-tertiary/20 shadow-sm hover:border-tertiary/50 transition-colors group cursor-pointer relative overflow-hidden border-l-4 border-l-tertiary">
-                            <div class="absolute right-0 top-0 w-16 h-16 bg-tertiary/10 rounded-bl-full group-hover:bg-tertiary/20 transition-colors"></div>
-                            <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92830</span>
-                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/30 uppercase tracking-widest animate-pulse">Draft</span>
-                            </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-tertiary transition-colors">NexGen Metals</h4>
-                            <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
-                                <span class="flex items-center gap-1.5 text-white/70">
-                                    <span class="material-symbols-outlined text-[14px]">schedule</span> Yesterday, 4:20 PM
-                                </span>
-                                <span class="font-bold text-white bg-surface-container-highest px-2 py-0.5 rounded">112 Items</span>
-                            </div>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-secondary/20 shadow-sm hover:border-secondary/50 transition-colors group cursor-pointer relative overflow-hidden opacity-70 hover:opacity-100">
-                            <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92829</span>
-                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/30 uppercase tracking-widest">Validated</span>
-                            </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Summit Supplies</h4>
-                            <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
-                                <span class="flex items-center gap-1.5 text-white/70">
-                                    <span class="material-symbols-outlined text-[14px]">schedule</span> Oct 12, 09:15 AM
-                                </span>
-                                <span class="font-bold text-white bg-surface-container-highest px-2 py-0.5 rounded">8 Items</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stats Visual -->
-                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden hover-lift border-primary/20 bg-primary/10">
-                    <div class="relative z-10">
-                        <p class="text-[11px] uppercase tracking-widest font-bold text-white mb-2">Monthly Throughput</p>
-                        <p class="text-5xl font-headline font-black text-white glow-text tracking-tight">1,482</p>
-                        <div class="mt-4 flex items-center gap-2">
-                            <span class="text-xs bg-secondary/20 text-secondary border border-secondary/30 px-2 py-1 rounded font-bold">+12.5%</span>
-                            <span class="text-xs text-on-surface-variant font-medium">vs last month</span>
-                        </div>
-                    </div>
-                    <!-- Ambient Glow effect -->
-                    <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-primary rounded-full blur-[80px] opacity-40"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Warehouse Validations Secondary Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-10">
-            <!-- Left map graphic -->
-             <div class="col-span-1 glass-panel rounded-3xl overflow-hidden relative min-h-[220px] flex items-end hover-lift border-primary/20 group">
-                <img class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity grayscale group-hover:grayscale-0 group-hover:opacity-50 transition-all duration-700 hover:scale-105" data-alt="Warehouse Storage Interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaC1RD2Dau3Q6SeNnKATyn9Xw-y-BbTbOtnS55k0LJXNKp6ysG9TrJCl4WgAQ4Q-Q4kndhtsDEUVyTs5OIiHPAasVeyfoU0thfOpKocAp26FcS_vskO6gluk3aj_7ro-ck3p9SSJqobc9CP6NGHjaxcrK5c1lMq25JZf9hd6fX42eAKGoc3_7GOLng1lCbrfpe--Gl3H-FN5CJtSYwYZtVaOFZkdo-gipgXZ91lB3_jaa8dfPliUx49JnWm3eKyfIe-2SOuhJR86GD"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            <!-- Navigation Links -->
+            <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+                <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <i class="fas fa-grid-2 text-lg"></i>
+                    <span class="font-medium tracking-tight">Command Center</span>
+                </a>
                 
-                <div class="relative p-6 text-white w-full">
-                    <p class="text-[11px] uppercase font-bold tracking-widest text-primary drop-shadow-[0_0_8px_rgba(99,102,241,0.8)] mb-2">North Logistics Hub</p>
-                    <div class="flex justify-between items-end mb-3">
-                         <h4 class="text-sm font-bold text-white drop-shadow-md">Current Utilization</h4>
-                         <span class="text-lg font-black font-headline glow-text text-secondary">84%</span>
+                <div class="pt-6 pb-2 px-6">
+                    <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-[0.3em]">Inventory Ops</p>
+                </div>
+
+                <a href="products.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-pills text-lg"></i>
                     </div>
-                    <div class="w-full h-2 bg-surface-container-high border border-outline-variant rounded-full mt-2 overflow-hidden shadow-inner">
-                        <div class="h-full bg-gradient-to-r from-emerald-500 to-secondary w-[84%] rounded-full shadow-glow-secondary"></div>
+                    <span class="font-medium tracking-tight">Medicine Catalog</span>
+                </a>
+
+                <a href="receipts.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl bg-primary text-on-primary shadow-md shadow-primary/20 transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-receipt text-lg"></i>
+                    </div>
+                    <span class="font-semibold tracking-tight">Dispense Tracking</span>
+                </a>
+
+                <a href="transfers.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-truck-ramp-box text-lg"></i>
+                    </div>
+                    <span class="font-medium tracking-tight">Stock Movements</span>
+                </a>
+
+                <div class="pt-6 pb-2 px-6">
+                    <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-[0.3em]">Compliance</p>
+                </div>
+
+                <a href="adjustments.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-clipboard-check text-lg"></i>
+                    </div>
+                    <span class="font-medium tracking-tight">Inventory Audit</span>
+                </a>
+            </nav>
+
+            <!-- User Session Info (Same as Dashboard) -->
+            <div class="p-6 bg-surface-container-low border-t border-outline-variant">
+                <div class="flex items-center space-x-4 p-3 rounded-2xl bg-surface-container-high border border-outline-variant/30">
+                    <div class="relative">
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=006a6a&color=fff&bold=true" class="h-11 w-11 rounded-xl shadow-md border-2 border-primary/20" alt="Pharmacist avatar">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-black text-on-surface truncate tracking-tight uppercase">John Doe</p>
+                        <p class="text-[10px] font-bold text-primary/70 uppercase tracking-widest mt-0.5">Inventory Manager</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Validations To-Do -->
-            <div class="col-span-2 glass-panel p-8 rounded-3xl">
-                <div class="flex items-center justify-between mb-8 border-b border-outline-variant/30 pb-4">
-                    <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Pending Validations Floor Overview</h3>
-                    <div class="flex gap-2 items-center bg-tertiary/10 border border-tertiary/30 px-3 py-1.5 rounded-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-ping absolute"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-tertiary relative"></span>
-                        <span class="text-[11px] font-bold text-tertiary uppercase tracking-widest glow-text">3 High Priority</span>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-surface relative">
+            <!-- Header Section -->
+            <header class="h-20 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-10 z-20 sticky top-0">
+                <div class="flex items-center space-x-4">
+                    <nav class="flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant/40">
+                        <a href="dashboard.html" class="hover:text-primary transition-colors">Receipts</a>
+                        <i class="fas fa-chevron-right text-[8px]"></i>
+                        <span class="text-on-surface-variant">Dispense & Sales Tracking</span>
+                        <i class="fas fa-chevron-right text-[8px]"></i>
+                        <span class="text-primary tracking-widest">PH-SALE-118</span>
+                    </nav>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="px-6 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/40 text-[10px] font-black text-on-surface-variant uppercase tracking-widest hover:border-primary transition-all">Cancel</button>
+                    <button class="px-8 py-2.5 rounded-xl bg-primary text-on-primary text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Validate Sale</button>
+                </div>
+            </header>
+
+            <!-- Scrollable Page Content -->
+            <div class="flex-1 overflow-y-auto p-10 custom-scrollbar relative">
+                <!-- Sale Transaction Header -->
+                <div class="bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10 mb-10 overflow-hidden relative group">
+                    <div class="flex flex-wrap items-center justify-between gap-8 relative z-10">
+                        <div class="flex items-center space-x-8">
+                            <div class="h-20 w-20 rounded-3xl bg-primary/10 flex items-center justify-center text-primary">
+                                <i class="fas fa-file-invoice-dollar text-3xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-3">PH-SALE-118</h2>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-3 py-1 rounded-lg bg-primary-container text-[10px] font-black text-on-primary-container uppercase tracking-widest">Draft Transaction</span>
+                                    <div class="flex items-center text-on-surface-variant text-xs font-bold">
+                                        <i class="fas fa-calendar mr-2 opacity-40"></i>
+                                        <span>Oct 24, 2023 - 10:45 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Transaction Grid Info -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-10">
+                            <div>
+                                <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-widest mb-1">Patient Name / Department</p>
+                                <p class="font-black text-on-surface uppercase tracking-tight">Outpatient Dept (OPD)</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-widest mb-1">Dispensing Area</p>
+                                <p class="font-black text-on-surface uppercase tracking-tight">Main Pharmacy - Counter 4</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="p-5 bg-surface-container-low border border-outline-variant rounded-2xl flex items-center gap-5 hover:border-primary/50 transition-colors cursor-pointer group hover-lift shadow-sm">
-                        <div class="w-14 h-14 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center justify-center text-primary shadow-glow group-hover:scale-110 transition-transform">
-                            <span class="material-symbols-outlined text-[28px]">precision_manufacturing</span>
-                        </div>
+
+                <!-- Dispense Items Section -->
+                <div class="bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10">
+                    <div class="flex items-center justify-between mb-8">
                         <div>
-                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-primary transition-colors">Precision Bearings X2</p>
-                            <p class="text-xs text-on-surface-variant font-medium mt-1">Arrived 2h ago • Dock 4</p>
+                            <h3 class="text-2xl font-headline font-black text-on-surface tracking-tight uppercase leading-none">Prescription Items</h3>
+                            <p class="text-[10px] font-black text-on-surface-variant/60 uppercase tracking-widest mt-2 px-1">Inventory deduction & sales reconciliation</p>
                         </div>
+                        <button class="flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Medicine</span>
+                        </button>
                     </div>
-                    <div class="p-5 bg-surface-container-low border border-outline-variant rounded-2xl flex items-center gap-5 hover:border-primary/50 transition-colors cursor-pointer group hover-lift shadow-sm">
-                        <div class="w-14 h-14 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center justify-center text-secondary shadow-glow-secondary group-hover:scale-110 transition-transform">
-                            <span class="material-symbols-outlined text-[28px]">fluid</span>
-                        </div>
-                        <div>
-                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-secondary transition-colors">Industrial Lubricant</p>
-                            <p class="text-xs text-on-surface-variant font-medium mt-1">Arrived 4h ago • Dock 2</p>
+
+                    <!-- Items Table -->
+                    <div class="overflow-hidden border border-outline-variant/30 rounded-3xl">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-surface-container-high">
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Product Molecule</th>
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Lot / Serial</th>
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">UoM</th>
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] text-right">Quantity</th>
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] text-right">Unit Price</th>
+                                    <th class="px-8 py-5 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] text-right">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/30 font-medium text-sm">
+                                <tr class="hover:bg-surface-container transition-colors group">
+                                    <td class="px-8 py-6">
+                                        <p class="font-black text-on-surface uppercase tracking-tight leading-none mb-1">Azithromycin 500mg</p>
+                                        <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Anti-Infective</p>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <span class="px-3 py-1 rounded-lg bg-surface text-[11px] font-black text-on-surface-variant border border-outline-variant/40 tracking-widest">B-882193</span>
+                                    </td>
+                                    <td class="px-8 py-6 text-on-surface-variant uppercase text-xs font-bold">Tablets</td>
+                                    <td class="px-8 py-6 text-right font-headline font-black text-on-surface">3.00</td>
+                                    <td class="px-8 py-6 text-right text-on-surface-variant font-bold">$12.50</td>
+                                    <td class="px-8 py-6 text-right font-headline font-black text-primary">$37.50</td>
+                                </tr>
+                                <tr class="hover:bg-surface-container transition-colors group">
+                                    <td class="px-8 py-6">
+                                        <p class="font-black text-on-surface uppercase tracking-tight leading-none mb-1">Paracetamol 500mg</p>
+                                        <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Analgesic</p>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <span class="px-3 py-1 rounded-lg bg-surface text-[11px] font-black text-on-surface-variant border border-outline-variant/40 tracking-widest">L-4421-2</span>
+                                    </td>
+                                    <td class="px-8 py-6 text-on-surface-variant uppercase text-xs font-bold">STRIPS (10s)</td>
+                                    <td class="px-8 py-6 text-right font-headline font-black text-on-surface">2.00</td>
+                                    <td class="px-8 py-6 text-right text-on-surface-variant font-bold">$2.20</td>
+                                    <td class="px-8 py-6 text-right font-headline font-black text-primary">$4.40</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Totals Section -->
+                    <div class="mt-10 flex justify-end">
+                        <div class="w-80 space-y-4">
+                            <div class="flex justify-between items-center text-xs font-bold text-on-surface-variant uppercase tracking-widest mr-4">
+                                <span>Total Volume:</span>
+                                <span>5.00 Items</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs font-bold text-on-surface-variant uppercase tracking-widest mr-4">
+                                <span>Tax (5%):</span>
+                                <span>$2.09</span>
+                            </div>
+                            <div class="h-px bg-outline-variant"></div>
+                            <div class="flex justify-between items-center p-6 bg-primary rounded-[1.5rem] shadow-lg shadow-primary/20">
+                                <span class="text-xs font-black text-on-primary uppercase tracking-[0.2em]">Grand Total:</span>
+                                <span class="text-3xl font-headline font-black text-on-primary">$43.99</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-</main>
 
-<!-- Toast Container -->
-<div id="toast-container" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2 pointer-events-none"></div>
-
-<!-- Activity Overlay -->
-<div id="activity-overlay" class="hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] transition-opacity opacity-0"></div>
-
-<!-- Activity Panel -->
-<div id="activity-panel" class="fixed top-0 right-0 h-full w-80 glass-panel border-l border-outline-variant z-[100] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-    <div class="flex items-center justify-between p-6 border-b border-outline-variant/50">
-        <h3 class="text-lg font-bold text-white tracking-tight">Activity History</h3>
-        <button id="close-activity" class="p-2 text-on-surface-variant hover:text-white rounded-lg hover:bg-surface-container-high transition-colors">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-    </div>
-    <div class="flex-1 overflow-y-auto p-4 custom-scrollbar" id="activity-log"></div>
-</div>
-
-<!-- Add New Item Modal -->
-<div id="add-new-modal" class="modal hidden fixed inset-0 z-[110] items-center justify-center pointer-events-auto">
-    <div class="absolute inset-0 bg-background/80 backdrop-blur-md modal-backdrop"></div>
-    <div class="relative glass-panel border border-outline-variant rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl modal-content transform scale-95 translate-y-4 transition-all duration-300">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-headline font-bold text-white">Create New Item</h2>
-            <button data-close-modal class="text-on-surface-variant hover:text-white transition-colors p-2 rounded-lg hover:bg-surface-container-high">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        <div class="space-y-4">
-            <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">inventory_2</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Add Product</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new product to inventory</p>
-                </div>
-            </a>
-            <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">local_shipping</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Create Delivery</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
-                </div>
-            </a>
-            <a href="receipts.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-tertiary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">receipt_long</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-tertiary transition-colors">Create Receipt</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Receive new stock from suppliers</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<script type="module" src="../js/app.js"></script>
+    <script src="../js/app.js" type="module"></script>
 </body>
-
 </html>
