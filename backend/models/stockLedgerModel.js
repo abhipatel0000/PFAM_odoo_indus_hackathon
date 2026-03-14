@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+import pool from '../config/db.js';
 
 const stockLedgerModel = {
     /**
@@ -37,11 +37,17 @@ const stockLedgerModel = {
      * Update stock_balance table and insert ledger entry atomically
      * This is the core function called by receipts, deliveries, transfers, adjustments
      */
-    async applyMovement({ product_id, location_id, qty_change, ...ledgerData }) {
-        const conn = await pool.getConnection();
-        try {
-            await conn.beginTransaction();
+    async applyMovement({ product_id, location_id, qty_change, ...ledgerData }, externalConn = null) {
+        let conn = externalConn;
+        let isInternalConn = false;
 
+        if (!conn) {
+            conn = await pool.getConnection();
+            await conn.beginTransaction();
+            isInternalConn = true;
+        }
+
+        try {
             // 1. Upsert stock_balance
             await conn.query(
                 `INSERT INTO stock_balance (product_id, location_id, quantity)
@@ -63,13 +69,19 @@ const stockLedgerModel = {
                 ...ledgerData, conn
             });
 
-            await conn.commit();
+            if (isInternalConn) {
+                await conn.commit();
+            }
             return qty_after;
         } catch (err) {
-            await conn.rollback();
+            if (isInternalConn) {
+                await conn.rollback();
+            }
             throw err;
         } finally {
-            conn.release();
+            if (isInternalConn) {
+                conn.release();
+            }
         }
     },
 
@@ -123,4 +135,4 @@ const stockLedgerModel = {
     }
 };
 
-module.exports = stockLedgerModel;
+export default stockLedgerModel;

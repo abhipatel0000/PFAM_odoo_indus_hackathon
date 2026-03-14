@@ -1,5 +1,5 @@
-const express = require('express');
-const warehouseModel = require('../models/warehouseModel');
+import express from 'express';
+import warehouseModel from '../models/warehouseModel.js';
 const router = express.Router();
 
 // Get all warehouses
@@ -38,4 +38,4 @@ router.post('/locations', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

@@ -1,533 +1,403 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>MediSync - Pharmacy Dashboard</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSync | Pharmacy Inventory & Dispense</title>
+    <!-- Tailwind CSS with custom configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="../css/core-theme.css" rel="stylesheet">
     <script src="../js/tailwind-config.js"></script>
 </head>
-<body class="flex min-h-screen animate-fade-in bg-background text-on-surface selction:bg-primary selection:text-white" data-page="dashboard">
-
-<!-- SideNavBar -->
-<aside class="w-64 glass-panel border-r border-outline-variant text-on-surface flex flex-col fixed h-full z-30">
-    <div class="px-6 py-8">
-        <div class="flex items-center gap-4 mb-10 hover-lift cursor-pointer">
-            <div class="w-12 h-12 primary-gradient rounded-xl flex items-center justify-center shadow-glow">
-                <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
+<body class="bg-surface font-sans text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="w-72 bg-surface-container border-r border-outline-variant flex flex-col z-30 transition-all duration-300">
+            <!-- Brand Logo -->
+            <div class="p-8 flex items-center space-x-3">
+                <div class="h-10 w-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <i class="fas fa-prescription text-on-primary text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-headline font-black tracking-tight text-on-surface leading-none">MEDISYNC</h1>
+                    <p class="text-[10px] font-bold tracking-[0.2em] text-primary/60 mt-1 uppercase">Pharma Nexus</p>
+                </div>
             </div>
-            <div>
-                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">MediSync</h1>
-                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Pharmacy System</p>
-            </div>
-        </div>
-        <nav class="space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high text-white font-medium shadow-md border border-outline-variant" href="#">
-                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-                <span class="text-sm">Dashboard</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="products.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">vaccines</span>
-                <span class="text-sm">Medicine Stock</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="deliveries.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
-                <span class="text-sm">Orders</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="receipts.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">local_shipping</span>
-                <span class="text-sm">Suppliers</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">assessment</span>
-                <span class="text-sm">Reports</span>
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
-                <span class="text-sm">Settings</span>
-            </a>
-        </nav>
-    </div>
-    <div class="mt-auto px-6 py-6 border-t border-outline-variant">
-        <button data-modal-target="add-new-modal" class="w-full btn-primary-gradient text-white py-3.5 rounded-xl text-sm font-bold mb-6 hover-lift flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-sm">add</span> Add New Item
-        </button>
-        <div class="space-y-1">
-            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
-                <span class="material-symbols-outlined text-sm">help_outline</span> Support
-            </a>
-            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
-                <span class="material-symbols-outlined text-sm">logout</span> Logout
-            </a>
-        </div>
-    </div>
-</aside>
 
-<!-- Main Content Area -->
-<main class="flex-1 ml-64 bg-background min-h-screen">
-    <!-- TopNavBar -->
-    <header class="sticky top-0 z-20 glass-header px-8 h-20 flex items-center justify-between">
-        <div class="relative flex items-center bg-surface-container-low px-4 py-2.5 rounded-2xl w-[400px] border border-outline-variant focus-within:ring-2 ring-primary transition-all">
-            <span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
-            <input id="global-search-input" class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/60 text-white ml-2 outline-none" placeholder="Search items, orders, or suppliers..." type="text" autocomplete="off" />
-            <div class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] text-on-surface-variant font-mono">⌘K</div>
-            <!-- Search Results Dropdown -->
-            <div id="global-search-results" class="hidden absolute top-full left-0 right-0 mt-3 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl overflow-hidden z-[100] max-h-96 overflow-y-auto custom-scrollbar"></div>
-        </div>
-        <div class="flex items-center gap-6">
-            <div class="flex items-center gap-4 text-on-surface-variant">
-                <button data-dropdown-toggle="notifications-dropdown" class="relative hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span id="notifications-indicator" class="absolute top-1 right-1 w-2.5 h-2.5 bg-error rounded-full border-2 border-background animate-pulse hidden"></span>
-                </button>
-                <div id="notifications-dropdown" class="hidden absolute top-full right-0 mt-3 w-80 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
-                    <div class="px-4 py-3 border-b border-outline-variant/50 flex justify-between items-center">
-                        <h3 class="text-[11px] font-bold text-on-surface-variant tracking-widest uppercase">Notifications</h3>
-                        <button class="text-primary text-xs font-bold hover:underline">Mark all read</button>
+            <!-- Navigation Links -->
+            <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+                <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl bg-primary text-on-primary shadow-md shadow-primary/20 group transition-all duration-200">
+                    <i class="fas fa-grid-2 text-lg"></i>
+                    <span class="font-semibold tracking-tight">Command Center</span>
+                </a>
+                
+                <div class="pt-6 pb-2 px-6">
+                    <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-[0.3em]">Inventory Ops</p>
+                </div>
+
+                <a href="products.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-pills text-lg group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <div id="notifications-list" class="max-h-[400px] overflow-y-auto custom-scrollbar"></div>
-                </div>
-                <button data-toggle-activity class="hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
-                    <span class="material-symbols-outlined">history</span>
-                </button>
-            </div>
-            <div class="h-8 w-[1px] bg-outline-variant"></div>
-            <div class="relative"><div data-dropdown-toggle="profile-dropdown" class="flex items-center gap-4 cursor-pointer hover:bg-surface-container-low p-1.5 pr-4 rounded-full transition-colors border border-transparent hover:border-outline-variant">
-                <img alt="Manager Profile" class="w-9 h-9 rounded-full bg-surface-container-highest object-cover ring-2 ring-primary ring-offset-2 ring-offset-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwq8Lal-Lv43B3Pj3zYxFmnnySvLuEs_fhAh9PqBJ0I1p1AvUwx1qKFC6_FJ4xDPrweMunYItHXT7x6jqtdgYrbANObnahG1dbftH6j4tdYtvbhUYvg-4G9PTie5EqGDLVEGejma3w9jwykqQxTE4U0_4IxQ6hresJNXaHgrHvntMNeSfed-xzDsVBIKwskh72KwO68q469XWTTB66_jrmPAuRTpDD8Hjbkttucy7oJvKxKJrui15gyQxsVmHNFR8KOE4Buqz0S2ua"/>
-                <div class="text-left hidden md:block">
-                    <p class="text-sm font-bold text-white leading-none">Prutha Patel</p>
-                    <p class="text-[10px] text-on-surface-variant mt-1 font-medium">Lead Operations</p>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
-            </div>
-            <!-- Profile Dropdown -->
-            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
-                <div class="py-2">
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-                    </a>
-                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
-                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
-                    </a>
-                </div>
-            </div>
-            </div>
-            <!-- Profile Dropdown -->
-            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
-                <div class="py-2">
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
-                    </a>
-                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
-                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
-                    </a>
-                </div>
-            </div>
-            </div>
-        </div>
-    </header>
+                    <span class="font-medium tracking-tight">Medicine Catalog</span>
+                </a>
 
-    <div class="px-8 py-8 space-y-8 animate-fade-in max-w-[1600px] mx-auto">
-        <!-- Header Section -->
-        <div class="flex justify-between items-end">
-            <div>
-                <h2 class="text-4xl font-headline font-bold text-white tracking-tight">Dashboard Overview</h2>
-                <p class="text-on-surface-variant text-sm mt-2 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-secondary shadow-glow-secondary animate-pulse-slow"></span>
-                    Live warehouse status & operations pipeline
-                </p>
-            </div>
-            <div class="flex gap-3">
-                <button class="px-5 py-2.5 bg-surface-container-low text-white border border-outline-variant hover:border-primary transition-colors hover:text-primary rounded-xl text-sm font-semibold hover-lift hover:bg-surface-container-high shadow-md">Export Report</button>
-                <button class="px-5 py-2.5 btn-primary-gradient text-white rounded-xl text-sm font-bold hover-lift">Generate PO</button>
-            </div>
-        </div>
-
-        <!-- KPI Metric Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <!-- Metric 1 -->
-            <div class="p-6 glass-panel rounded-2xl hover-lift flex flex-col justify-between h-44 relative overflow-hidden group">
-                <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity"></div>
-                <div class="flex justify-between items-start z-10">
-                    <div class="p-2.5 bg-primary/10 rounded-xl text-primary border border-primary/20">
-                        <span class="material-symbols-outlined text-xl">inventory</span>
+                <a href="receipts.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-receipt text-lg group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-lg border border-secondary/20">+4.2%</span>
-                </div>
-                <div class="z-10">
-                    <p class="text-3xl font-headline font-black text-white">2,450</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Total Medicines</p>
-                </div>
-            </div>
+                    <span class="font-medium tracking-tight">Dispense Tracking</span>
+                </a>
 
-            <!-- Metric 2 -->
-            <div class="p-6 glass-panel border border-tertiary/30 rounded-2xl hover-lift flex flex-col justify-between h-44 relative overflow-hidden group shadow-[0_0_15px_-3px_rgba(244,63,94,0.15)]">
-                <div class="absolute -right-6 -top-6 w-24 h-24 bg-tertiary rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity"></div>
-                <div class="flex justify-between items-start z-10">
-                    <div class="p-2.5 bg-tertiary/10 rounded-xl text-tertiary border border-tertiary/20">
-                        <span class="material-symbols-outlined text-xl text-tertiary">warning</span>
+                <a href="transfers.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-truck-ramp-box text-lg group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 rounded-lg text-[10px] font-bold text-tertiary tracking-wider animate-pulse">ACTION REQUIRED</span>
-                </div>
-                <div class="z-10">
-                    <p class="text-3xl font-headline font-black text-white">12</p>
-                    <p class="text-sm text-tertiary font-medium mt-1">Expiring Soon / Low Stock</p>
-                </div>
-            </div>
+                    <span class="font-medium tracking-tight">Stock Movements</span>
+                </a>
 
-            <!-- Metric 3 -->
-            <div class="p-6 glass-panel rounded-2xl hover-lift flex flex-col justify-between h-44 relative overflow-hidden group">
-                <div class="absolute -right-6 -top-6 w-24 h-24 bg-white rounded-full blur-3xl opacity-5 group-hover:opacity-10 transition-opacity"></div>
-                <div class="flex justify-between items-start z-10">
-                    <div class="p-2.5 bg-surface-container-high rounded-xl text-on-surface-variant border border-outline-variant">
-                        <span class="material-symbols-outlined text-xl">call_received</span>
+                <div class="pt-6 pb-2 px-6">
+                    <p class="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-[0.3em]">Compliance</p>
+                </div>
+
+                <a href="adjustments.html" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-clipboard-check text-lg group-hover:scale-110 transition-transform"></i>
                     </div>
-                </div>
-                <div class="z-10">
-                    <p class="text-3xl font-headline font-black text-white">18</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Pending Prescriptions</p>
-                </div>
-            </div>
+                    <span class="font-medium tracking-tight">Inventory Audit</span>
+                </a>
 
-            <!-- Metric 4 -->
-            <div class="p-6 glass-panel rounded-2xl hover-lift flex flex-col justify-between h-44 relative overflow-hidden group">
-                <div class="absolute right-0 bottom-0 w-32 h-32 bg-secondary rounded-full blur-[50px] opacity-10 group-hover:opacity-20 transition-opacity"></div>
-                <div class="flex justify-between items-start z-10">
-                    <div class="p-2.5 bg-surface-container-high rounded-xl text-on-surface-variant border border-outline-variant">
-                        <span class="material-symbols-outlined text-xl text-secondary">local_shipping</span>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group text-on-surface-variant/30 grayscale">
+                    <div class="w-8 flex justify-center">
+                        <i class="fas fa-chart-line-up text-lg"></i>
                     </div>
-                </div>
-                <div class="z-10">
-                    <p class="text-3xl font-headline font-black text-white">34</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Recent Deliveries</p>
-                </div>
-            </div>
-        </div>
+                    <span class="font-medium tracking-tight">Analytics Pro</span>
+                </a>
+            </nav>
 
-        <!-- Filter Toolbar -->
-        <div class="glass-panel p-3 rounded-2xl flex flex-wrap items-center gap-4">
-            <div class="flex items-center gap-2 pl-3 border-r border-outline-variant pr-4">
-                <span class="material-symbols-outlined text-on-surface-variant text-xl">tune</span>
-                <span class="text-sm font-bold text-white tracking-wide">Filters</span>
-            </div>
-            
-            <div class="flex flex-wrap gap-2 flex-1">
-                <select class="bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary focus:border-transparent min-w-[140px] px-4 py-2 text-white outline-none cursor-pointer hover:bg-surface-container-high transition-colors">
-                    <option>Type: All</option>
-                    <option>Receipt</option>
-                    <option>Delivery</option>
-                    <option>Internal Transfer</option>
-                </select>
-                <select class="bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary focus:border-transparent min-w-[140px] px-4 py-2 text-white outline-none cursor-pointer hover:bg-surface-container-high transition-colors">
-                    <option>Status: All</option>
-                    <option>Draft</option>
-                    <option>Waiting</option>
-                    <option>Done</option>
-                </select>
-                <select class="bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary focus:border-transparent min-w-[140px] px-4 py-2 text-white outline-none cursor-pointer hover:bg-surface-container-high transition-colors">
-                    <option>Hub: All</option>
-                    <option>Main Hub - A</option>
-                    <option>Logistics Center - B</option>
-                </select>
-            </div>
-            <button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:text-white rounded-xl transition-colors text-sm font-semibold">
-                <span>Reset</span>
-            </button>
-        </div>
-
-        <!-- Recent Operations Table -->
-        <div class="glass-panel rounded-3xl overflow-hidden shadow-soft">
-            <div class="px-8 py-6 bg-surface-container-lowest/50 flex justify-between items-center border-b border-outline-variant backdrop-blur-md">
-                <h3 class="font-headline font-bold text-xl text-white">Live Pharmacy Operations</h3>
-                <div class="flex gap-3">
-                    <button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high border border-outline-variant rounded-xl transition-all hover:text-primary">
-                        <span class="material-symbols-outlined text-xl">refresh</span>
-                    </button>
-                    <button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high border border-outline-variant rounded-xl transition-all">
-                        <span class="material-symbols-outlined text-xl">filter_list</span>
+            <!-- User Session Info -->
+            <div class="p-6 bg-surface-container-low border-t border-outline-variant">
+                <div class="flex items-center space-x-4 p-3 rounded-2xl bg-surface-container-high border border-outline-variant/30">
+                    <div class="relative">
+                        <img src="https://ui-avatars.com/api/?name=Prutha+Patel&background=006a6a&color=fff&bold=true" class="h-11 w-11 rounded-xl shadow-md border-2 border-primary/20" alt="Pharmacist avatar">
+                        <div class="absolute -bottom-1 -right-1 h-4 w-4 bg-green-500 border-2 border-surface-container-high rounded-full shadow-sm animate-pulse-subtle"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-black text-on-surface truncate tracking-tight uppercase">Prutha Patel</p>
+                        <p class="text-[10px] font-bold text-primary/70 uppercase tracking-widest mt-0.5">Head Pharmacist</p>
+                    </div>
+                    <button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-error-container hover:text-error transition-all duration-200 logout-btn">
+                        <i class="fas fa-power-off text-sm"></i>
                     </button>
                 </div>
             </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-surface-container-lowest border-b border-outline-variant">
-                            <th class="px-8 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Operation ID</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Type</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Medicine</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest text-right">Qty</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Warehouse</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
-                            <th class="px-8 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-outline-variant">
-                        <!-- Row 1 -->
-                        <tr class="group cursor-pointer">
-                            <td class="px-8 py-5">
-                                <span class="text-sm font-bold text-white group-hover:text-primary transition-colors font-mono">#WH-REC-9021</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span class="inline-flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-high px-3 py-1.5 rounded-lg border border-outline-variant">
-                                    <span class="material-symbols-outlined text-sm">call_received</span> Receipt
-                                </span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">AM</div>
-                                    <div>
-                                        <p class="text-sm font-bold text-white">Amoxicillin 500mg</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: B-998 | Exp: 2027</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-sm font-bold text-white text-right">500 <span class="text-on-surface-variant font-medium text-xs">units</span></td>
-                            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Main Hub - A</td>
-                            <td class="px-6 py-5">
-                                <span class="px-3 py-1 bg-secondary/10 border border-secondary/30 text-secondary rounded-lg text-xs font-bold tracking-wide">DONE</span>
-                            </td>
-                            <td class="px-8 py-5 text-right">
-                                <button class="p-2 text-on-surface-variant hover:text-white hover:bg-surface-container-high rounded-xl transition-all">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <!-- Row 2 -->
-                        <tr class="group cursor-pointer">
-                            <td class="px-8 py-5">
-                                <span class="text-sm font-bold text-white group-hover:text-primary transition-colors font-mono">#WH-DEL-8872</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span class="inline-flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-high px-3 py-1.5 rounded-lg border border-outline-variant">
-                                    <span class="material-symbols-outlined text-sm">call_made</span> Delivery
-                                </span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">PA</div>
-                                    <div>
-                                        <p class="text-sm font-bold text-white">Paracetamol Syrup</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: CC-102 | Exp: 2025</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-sm font-bold text-white text-right">120 <span class="text-on-surface-variant font-medium text-xs">units</span></td>
-                            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Logistic Center - B</td>
-                            <td class="px-6 py-5">
-                                <span class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary rounded-lg text-xs font-bold tracking-wide animate-pulse">WAITING</span>
-                            </td>
-                            <td class="px-8 py-5 text-right">
-                                <button class="p-2 text-on-surface-variant hover:text-white hover:bg-surface-container-high rounded-xl transition-all">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </button>
-                            </td>
-                        </tr>
-                         <!-- Row 3 -->
-                        <tr class="group cursor-pointer">
-                            <td class="px-8 py-5">
-                                <span class="text-sm font-bold text-white group-hover:text-primary transition-colors font-mono">#WH-TRA-7712</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span class="inline-flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-high px-3 py-1.5 rounded-lg border border-outline-variant">
-                                    <span class="material-symbols-outlined text-sm">sync_alt</span> Transfer
-                                </span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">CO</div>
-                                    <div>
-                                        <p class="text-sm font-bold text-white">Cough Syrup</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: ST-440 | Exp: 2026</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-sm font-bold text-white text-right">45 <span class="text-on-surface-variant font-medium text-xs">units</span></td>
-                            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium flex items-center gap-1">A <span class="material-symbols-outlined text-[10px]">arrow_forward</span> B</td>
-                            <td class="px-6 py-5">
-                                <span class="px-3 py-1 bg-surface-container-high border border-outline-variant text-on-surface-variant rounded-lg text-xs font-bold tracking-wide">DRAFT</span>
-                            </td>
-                            <td class="px-8 py-5 text-right">
-                                <button class="p-2 text-on-surface-variant hover:text-white hover:bg-surface-container-high rounded-xl transition-all">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr class="group cursor-pointer">
-                            <td class="px-8 py-5">
-                                <span class="text-sm font-bold text-white group-hover:text-primary transition-colors font-mono">#WH-REC-9008</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span class="inline-flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-high px-3 py-1.5 rounded-lg border border-outline-variant">
-                                    <span class="material-symbols-outlined text-sm text-tertiary">error</span> Receipt
-                                </span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-tertiary/30 flex items-center justify-center text-xs font-bold text-tertiary">IB</div>
-                                    <div>
-                                        <p class="text-sm font-bold text-white">Ibuprofen 400mg</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: IB-01 | Exp: 2024 (EXPIRED)</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-sm font-bold text-white text-right">1,000 <span class="text-on-surface-variant font-medium text-xs">units</span></td>
-                            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Main Hub - A</td>
-                            <td class="px-6 py-5">
-                                <span class="px-3 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary rounded-lg text-xs font-bold tracking-wide">ERROR</span>
-                            </td>
-                            <td class="px-8 py-5 text-right">
-                                <button class="p-2 text-on-surface-variant hover:text-white hover:bg-surface-container-high rounded-xl transition-all">
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="px-8 py-4 bg-surface-container-lowest/50 flex items-center justify-between border-t border-outline-variant backdrop-blur-md">
-                <p class="text-xs font-medium text-on-surface-variant">Showing 1-10 of 42 operations</p>
-                <div class="flex gap-2">
-                    <button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-white disabled:opacity-30 transition-all" disabled>
-                        <span class="material-symbols-outlined text-sm">chevron_left</span>
-                    </button>
-                    <button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-white bg-surface-container-lowest transition-all">
-                        <span class="material-symbols-outlined text-sm">chevron_right</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+        </aside>
 
-        <!-- Bottom Section - Split Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-10">
-            <div class="md:col-span-2 space-y-4">
-                <div class="flex items-center justify-between pl-1">
-                    <h4 class="font-headline font-bold text-xl text-white">Stock Levels by Department</h4>
-                    <button class="text-sm text-primary font-bold hover:underline flex items-center gap-1"><span class="material-symbols-outlined text-sm">map</span> View Heatmap</button>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="p-6 glass-panel rounded-3xl hover-lift relative overflow-hidden group">
-                        <div class="flex items-center justify-between mb-8 relative z-10">
-                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">MAIN PHARMACY</span>
-                            <span class="text-sm text-white font-black bg-surface-container-high px-3 py-1 rounded-lg border border-outline-variant">88%</span>
-                        </div>
-                        <div class="h-3 bg-surface-container-high rounded-full overflow-hidden border border-outline-variant relative z-10">
-                            <div class="h-full primary-gradient w-[88%] rounded-full shadow-glow"></div>
-                        </div>
-                        <div class="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-                            <span class="material-symbols-outlined text-[120px]">warehouse</span>
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-surface relative">
+            <!-- Header Section -->
+            <header class="h-20 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-10 z-20 sticky top-0">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h2 class="text-xl font-headline font-black text-on-surface tracking-tight uppercase">Operational Command</h2>
+                        <div class="flex items-center space-x-2 mt-0.5">
+                            <span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                            <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Real-time Stock Monitor</p>
                         </div>
                     </div>
-                     <div class="p-6 glass-panel rounded-3xl hover-lift relative overflow-hidden group">
-                        <div class="flex items-center justify-between mb-8 relative z-10">
-                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">EMERGENCY WARD</span>
-                            <span class="text-sm text-white font-black bg-surface-container-high px-3 py-1 rounded-lg border border-outline-variant">42%</span>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <div class="relative group">
+                        <div class="absolute -top-1.5 -right-1.5 h-5 w-5 bg-error text-[10px] font-black text-on-error flex items-center justify-center rounded-full border-2 border-surface shadow-lg">3</div>
+                        <button class="h-10 w-10 flex items-center justify-center rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high transition-all border border-outline-variant/30 group-hover:scale-105">
+                            <i class="fas fa-bell text-sm"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="h-10 w-px bg-outline-variant"></div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] leading-none mb-1">Clinic System</p>
+                            <p class="text-xs font-black text-on-surface uppercase tracking-tight">Main Dispensary</p>
                         </div>
-                        <div class="h-3 bg-surface-container-high rounded-full overflow-hidden border border-outline-variant shadow-inner relative z-10">
-                            <div class="h-full bg-gradient-to-r from-secondary to-emerald-400 w-[42%] rounded-full shadow-glow-secondary"></div>
+                        <div class="h-10 w-10 flex items-center justify-center rounded-xl bg-primary text-on-primary shadow-lg shadow-primary/20">
+                            <i class="fas fa-h-square text-lg"></i>
                         </div>
-                        <div class="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-                            <span class="material-symbols-outlined text-[120px]">warehouse</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Page Content -->
+            <div class="flex-1 overflow-y-auto p-10 custom-scrollbar relative">
+                <!-- Grid-based Status Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                    <!-- Total Molecules -->
+                    <div class="status-card bg-surface-container-low border-2 border-outline-variant/30 p-8 rounded-[2rem] hover:border-primary/40 transition-all group overflow-hidden relative">
+                        <div class="flex justify-between items-start relative z-10">
+                            <div>
+                                <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Total Inventory</p>
+                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">1,248</h3>
+                                <div class="flex items-center text-primary text-xs font-bold tracking-tight bg-primary-container/30 w-fit px-2 py-1 rounded-lg">
+                                    <i class="fas fa-arrow-up text-[10px] mr-1.5"></i>
+                                    <span>+14.2%</span>
+                                </div>
+                            </div>
+                            <div class="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                                <i class="fas fa-box-archive text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 h-24 w-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+                    </div>
+
+                    <!-- Low Stock Alerts -->
+                    <div class="status-card bg-surface-container-low border-2 border-outline-variant/30 p-8 rounded-[2rem] hover:border-error/40 transition-all group overflow-hidden relative">
+                        <div class="flex justify-between items-start relative z-10">
+                            <div>
+                                <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Critical Alerts</p>
+                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">42</h3>
+                                <div class="flex items-center text-error text-xs font-bold tracking-tight bg-error-container/30 w-fit px-2 py-1 rounded-lg">
+                                    <i class="fas fa-exclamation-triangle text-[10px] mr-1.5"></i>
+                                    <span>Immediate Action</span>
+                                </div>
+                            </div>
+                            <div class="h-14 w-14 rounded-2xl bg-error/10 flex items-center justify-center text-error group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
+                                <i class="fas fa-droplet-percent text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 h-24 w-24 bg-error/5 rounded-full blur-2xl group-hover:bg-error/10 transition-colors"></div>
+                    </div>
+
+                    <!-- Daily Dispenses -->
+                    <div class="status-card bg-surface-container-low border-2 border-outline-variant/30 p-8 rounded-[2rem] hover:border-secondary/40 transition-all group overflow-hidden relative">
+                        <div class="flex justify-between items-start relative z-10">
+                            <div>
+                                <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Today's Dispense</p>
+                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">326</h3>
+                                <div class="flex items-center text-secondary text-xs font-bold tracking-tight bg-secondary-container/30 w-fit px-2 py-1 rounded-lg">
+                                    <i class="fas fa-prescription text-[10px] mr-1.5"></i>
+                                    <span>Average Flow</span>
+                                </div>
+                            </div>
+                            <div class="h-14 w-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-file-medical text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 h-24 w-24 bg-secondary/5 rounded-full blur-2xl group-hover:bg-secondary/10 transition-colors"></div>
+                    </div>
+
+                    <!-- Pipeline Capacity -->
+                    <div class="status-card bg-primary-container p-8 rounded-[2rem] border-2 border-primary/20 shadow-xl shadow-primary/10 overflow-hidden relative group">
+                        <div class="relative z-10">
+                            <p class="text-[10px] font-black text-on-primary-container/60 uppercase tracking-widest leading-none mb-3">System Health</p>
+                            <h3 class="text-4xl font-headline font-black text-on-primary-container tracking-tight leading-none mb-4">98.5%</h3>
+                            
+                            <div class="w-full bg-on-primary-container/10 h-2 rounded-full mb-3 overflow-hidden">
+                                <div class="bg-primary h-full w-[98.5%] rounded-full shadow-[0_0_10px_rgba(0,106,106,0.5)]"></div>
+                            </div>
+                            <p class="text-[10px] font-bold text-on-primary-container/80 uppercase tracking-tight">Node: Dispensary-Alpha-01</p>
+                        </div>
+                        <div class="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+                        <i class="fas fa-shield-virus absolute -right-2 -bottom-2 text-7xl text-on-primary-container opacity-5 group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                </div>
+
+                <!-- Main Activity Blocks -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-10">
+                    <!-- High Priority Movement Section -->
+                    <div class="xl:col-span-2 bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10 overflow-hidden relative">
+                        <div class="flex items-center justify-between mb-10">
+                            <div>
+                                <h4 class="text-2xl font-headline font-black text-on-surface tracking-tight uppercase leading-none">Critical Movements</h4>
+                                <p class="text-[10px] font-black text-on-surface-variant/60 uppercase tracking-widest mt-2 px-1">Active High-Priority Shipments</p>
+                            </div>
+                            <button class="px-6 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/40 text-[10px] font-black text-on-surface-variant uppercase tracking-widest hover:border-primary transition-all">Export Report</button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Movement Row 1 -->
+                            <div class="p-6 bg-surface-container border border-outline-variant/30 rounded-3xl flex items-center group hover:border-primary/30 transition-all hover:translate-x-1 duration-300">
+                                <div class="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 mr-6">
+                                    <i class="fas fa-plane-up"></i>
+                                </div>
+                                <div class="flex-1 min-w-0 pr-8">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <h5 class="font-black text-on-surface text-sm uppercase tracking-tight truncate">Amoxicillin 500mg Batch A-82</h5>
+                                        <span class="px-2 py-0.5 rounded-md bg-secondary/10 text-[9px] font-black text-secondary uppercase tracking-widest">Urgent</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
+                                            <i class="fas fa-location-dot mr-1.5 opacity-40"></i>
+                                            <span>Central Hub <i class="fas fa-arrow-right mx-1 opacity-20"></i> Main Clinic</span>
+                                        </div>
+                                        <div class="flex items-center text-[10px] font-bold text-primary/70">
+                                            <i class="fas fa-clock mr-1.5 opacity-40"></i>
+                                            <span>In Transit - E.T.A 14:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-headline font-black text-on-surface">5,000</p>
+                                    <p class="text-[9px] font-black text-on-surface-variant/40 uppercase tracking-widest">Caplets</p>
+                                </div>
+                            </div>
+
+                            <!-- Movement Row 2 -->
+                            <div class="p-6 bg-surface-container border border-outline-variant/30 rounded-3xl flex items-center group hover:border-primary/30 transition-all hover:translate-x-1 duration-300">
+                                <div class="h-12 w-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all duration-300 mr-6">
+                                    <i class="fas fa-truck-fast"></i>
+                                </div>
+                                <div class="flex-1 min-w-0 pr-8">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <h5 class="font-black text-on-surface text-sm uppercase tracking-tight truncate">Insulin Glargine 300U/ml</h5>
+                                        <span class="px-2 py-0.5 rounded-md bg-primary/10 text-[9px] font-black text-primary uppercase tracking-widest">Cold Chain</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
+                                            <i class="fas fa-snowflake mr-1.5 text-blue-400"></i>
+                                            <span>External Supplier <i class="fas fa-arrow-right mx-1 opacity-20"></i> Receiving Bay</span>
+                                        </div>
+                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
+                                            <i class="fas fa-check-circle mr-1.5 text-green-500"></i>
+                                            <span>Docked - Inspecting</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-headline font-black text-on-surface">150</p>
+                                    <p class="text-[9px] font-black text-on-surface-variant/40 uppercase tracking-widest">Vials</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Trend Preview -->
+                        <div class="mt-10 pt-10 border-t border-outline-variant/30 flex items-center space-x-10">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-4">
+                                    <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Demand Forecast</p>
+                                    <span class="text-[10px] font-black text-primary uppercase">Optimal</span>
+                                </div>
+                                <div class="flex items-end space-x-1 h-12">
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[40%]" title="Mon"></div>
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[65%]" title="Tue"></div>
+                                    <div class="flex-1 bg-primary rounded-t-sm h-[85%]" title="Wed"></div>
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[55%] animate-pulse-slow" title="Thu"></div>
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[30%]" title="Fri"></div>
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[45%]" title="Sat"></div>
+                                    <div class="flex-1 bg-outline-variant/40 rounded-t-sm h-[60%]" title="Sun"></div>
+                                </div>
+                            </div>
+                            <div class="w-48 p-6 bg-primary rounded-3xl relative overflow-hidden group">
+                                <div class="relative z-10">
+                                    <p class="text-[9px] font-black text-on-primary/60 uppercase tracking-widest leading-none mb-2">Efficiency Rating</p>
+                                    <h5 class="text-2xl font-headline font-black text-on-primary">94.2%</h5>
+                                </div>
+                                <i class="fas fa-bolt-lightning absolute -right-3 -bottom-3 text-5xl text-on-primary/10 group-hover:scale-125 transition-transform duration-500"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar Widgets -->
+                    <div class="space-y-10">
+                        <!-- Quick Actions -->
+                        <div class="bg-surface-container p-8 rounded-[2.5rem] border border-outline-variant/30">
+                            <h4 class="text-sm font-black text-on-surface uppercase tracking-[0.2em] mb-8 text-center">Fast-Track actions</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="flex flex-col items-center justify-center p-6 bg-surface rounded-[2rem] border border-outline-variant/30 hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all group">
+                                    <div class="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <span class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest text-center">Stock Entry</span>
+                                </button>
+                                <button class="flex flex-col items-center justify-center p-6 bg-surface rounded-[2rem] border border-outline-variant/30 hover:border-secondary hover:shadow-lg hover:shadow-secondary/5 transition-all group">
+                                    <div class="h-10 w-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary group-hover:scale-110 transition-transform mb-3">
+                                        <i class="fas fa-prescription"></i>
+                                    </div>
+                                    <span class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest text-center">New Dispense</span>
+                                </button>
+                                <button class="flex flex-col items-center justify-center p-6 bg-surface rounded-[2rem] border border-outline-variant/30 hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all group">
+                                    <div class="h-10 w-10 bg-primary-container/40 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-3">
+                                        <i class="fas fa-qrcode"></i>
+                                    </div>
+                                    <span class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest text-center">Scan Batch</span>
+                                </button>
+                                <button class="flex flex-col items-center justify-center p-6 bg-surface rounded-[2rem] border border-outline-variant/30 hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all group">
+                                    <div class="h-10 w-10 rounded-xl flex items-center justify-center text-on-surface-variant group-hover:scale-110 transition-transform mb-3">
+                                        <i class="fas fa-ellipsis"></i>
+                                    </div>
+                                    <span class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest text-center">More Apps</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- System Alerts Card -->
+                        <div class="bg-gradient-to-br from-[#1a1c1c] to-[#001414] p-8 rounded-[2.5rem] border border-primary/20 shadow-2xl relative overflow-hidden group">
+                            <div class="relative z-10">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                                        <i class="fas fa-microchip text-xs"></i>
+                                    </div>
+                                    <h4 class="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Synapse Alerts</h4>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                                        <i class="fas fa-temperature-arrow-up text-error mt-1"></i>
+                                        <div>
+                                            <p class="text-xs font-bold text-white tracking-tight">Fridge-02 Temp Normalizing</p>
+                                            <p class="text-[9px] text-white/40 uppercase font-black tracking-widest mt-1">Resolved 12m ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                                        <i class="fas fa-circle-nodes text-primary mt-1"></i>
+                                        <div>
+                                            <p class="text-xs font-bold text-white tracking-tight">Odoo Sync Successful</p>
+                                            <p class="text-[9px] text-white/40 uppercase font-black tracking-widest mt-1">Pulse active</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs text-on-surface-variant font-medium">MediSync Intelligence</p>
+                                        <h3 class="text-2xl font-headline font-black text-white glow-text">98.2%</h3>
+                                    </div>
+                                    <div class="h-12 w-12 rounded-full border-2 border-primary/30 flex items-center justify-center">
+                                        <div class="h-8 w-8 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -right-20 -bottom-20 h-64 w-64 bg-primary/10 rounded-full blur-[80px]"></div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="md:col-span-1 space-y-4">
-                <h4 class="font-headline font-bold text-xl text-white pl-1">System Health</h4>
-                <div class="p-8 glass-panel rounded-3xl relative overflow-hidden h-[155px] hover-lift group border border-primary/20 bg-primary/5">
-                    <div class="relative z-10 flex flex-col justify-between h-full">
-                        <div class="flex justify-between items-start">
-                             <p class="text-sm font-bold text-on-surface-variant uppercase tracking-wider">Inventory Accuracy</p>
-                             <span class="material-symbols-outlined text-primary group-hover:animate-pulse">health_and_safety</span>
-                        </div>
-                        <div>
-                            <p class="text-5xl font-headline font-black text-white glow-text tracking-tight">99.4%</p>
-                            <p class="text-xs text-secondary mt-2 flex items-center gap-1 font-bold">
-                                <span class="material-symbols-outlined text-sm">trending_up</span> Target Exceeded (+0.5%)
-                            </p>
-                        </div>
+            <!-- Floating Data Pulse -->
+            <div class="absolute bottom-10 right-10 z-30 pointer-events-none">
+                <div class="p-4 bg-surface-container-high/60 backdrop-blur-xl border border-outline-variant/30 rounded-2xl shadow-2xl flex items-center space-x-4 animate-float">
+                    <div class="relative h-8 w-12 flex space-x-0.5 items-end justify-between px-1">
+                        <div class="w-1.5 bg-primary rounded-full animate-pulse-bar" style="height: 40%; animation-delay: 0.1s"></div>
+                        <div class="w-1.5 bg-primary rounded-full animate-pulse-bar" style="height: 70%; animation-delay: 0.2s"></div>
+                        <div class="w-1.5 bg-primary rounded-full animate-pulse-bar" style="height: 45%; animation-delay: 0.3s"></div>
+                        <div class="w-1.5 bg-primary rounded-full animate-pulse-bar" style="height: 90%; animation-delay: 0.4s"></div>
                     </div>
-                    <!-- Decorative background element -->
-                    <div class="absolute -top-10 -right-10 w-48 h-48 bg-primary rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+                    <div>
+                        <p class="text-[8px] font-black text-on-surface-variant/40 uppercase tracking-[0.2em] leading-none mb-1">Global Sync</p>
+                        <p class="text-[10px] font-black text-primary uppercase tracking-widest">Active Pulse</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-</main>
 
-<!-- Toast Container -->
-<div id="toast-container" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2 pointer-events-none"></div>
+    <!-- Background Decoration Components -->
+    <div class="fixed top-0 right-0 w-[50vw] h-[50vh] bg-gradient-to-bl from-primary/5 via-primary/2 to-transparent -z-10 blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-0 left-0 w-[40vw] h-[40vh] bg-gradient-to-tr from-secondary/5 via-transparent to-transparent -z-10 blur-[100px] pointer-events-none"></div>
 
-<!-- Activity Overlay -->
-<div id="activity-overlay" class="hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] transition-opacity opacity-0"></div>
-
-<!-- Activity Panel -->
-<div id="activity-panel" class="fixed top-0 right-0 h-full w-80 glass-panel border-l border-outline-variant z-[100] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-    <div class="flex items-center justify-between p-6 border-b border-outline-variant/50">
-        <h3 class="text-lg font-bold text-white tracking-tight">Activity History</h3>
-        <button id="close-activity" class="p-2 text-on-surface-variant hover:text-white rounded-lg hover:bg-surface-container-high transition-colors">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-    </div>
-    <div class="flex-1 overflow-y-auto p-4 custom-scrollbar" id="activity-log"></div>
-</div>
-
-<!-- Add New Item Modal -->
-<div id="add-new-modal" class="modal hidden fixed inset-0 z-[110] items-center justify-center pointer-events-auto">
-    <div class="absolute inset-0 bg-background/80 backdrop-blur-md modal-backdrop"></div>
-    <div class="relative glass-panel border border-outline-variant rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl modal-content transform scale-95 translate-y-4 transition-all duration-300">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-headline font-bold text-white">Create New Item</h2>
-            <button data-close-modal class="text-on-surface-variant hover:text-white transition-colors p-2 rounded-lg hover:bg-surface-container-high">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        <div class="space-y-4">
-            <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">vaccines</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Add Medicine</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new medicine to inventory</p>
-                </div>
-            </a>
-            <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">local_shipping</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Supplier Delivery</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
-                </div>
-            </a>
-            <a href="receipts.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-tertiary hover:bg-surface-container-high transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">receipt_long</span>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Dispense / Sale</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Record pharmacy sales or dispatch</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<script type="module" src="../js/app.js"></script>
+    <script src="../js/app.js" type="module"></script>
 </body>
-
-
 </html>

@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+import pool from '../config/db.js';
 
 const warehouseModel = {
     /**
@@ -92,4 +92,4 @@ const warehouseModel = {
     }
 };
 
-module.exports = warehouseModel;
+export default warehouseModel;

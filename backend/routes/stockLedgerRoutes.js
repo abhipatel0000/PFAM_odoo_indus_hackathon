@@ -1,5 +1,5 @@
-const express = require('express');
-const stockLedgerModel = require('../models/stockLedgerModel');
+import express from 'express';
+import stockLedgerModel from '../models/stockLedgerModel.js';
 const router = express.Router();
 
 // Helper to handle common movement logic
@@ -103,4 +103,4 @@ router.get('/dashboard-summary', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

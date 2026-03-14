@@ -1,5 +1,6 @@
-const mysql = require('mysql2/promise');
-require('dotenv').config({ path: '../.env' });
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 
 // Create a connection pool for better performance and concurrency
 const pool = mysql.createPool({
@@ -28,4 +29,4 @@ pool.getConnection()
         process.exit(1);
     });
 
-module.exports = pool;
+export default pool;

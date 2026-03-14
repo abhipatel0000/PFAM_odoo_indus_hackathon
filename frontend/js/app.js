@@ -1,53 +1,65 @@
-import { initModal, openModal, closeModal } from './modules/modal.js';
-import { initToast } from './modules/toast.js';
-import { initDropdown } from './modules/dropdown.js';
-import { initSearch } from './modules/search.js';
-import { initNotifications } from './modules/notifications.js';
-import { initActivity, logActivity } from './modules/activity.js';
+import { initDashboard } from './dashboard.js';
+import { initProducts } from './products.js';
+import { initReceipts } from './receipts.js';
+import { initDeliveries } from './deliveries.js';
+import { initTransfers } from './transfers.js';
+import { initAdjustments } from './adjustments.js';
+import { initAuth, initLoginForm, initRegistrationForm } from './auth.js';
 
+// Global initialization
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Shared Modules
-    initModal();
-    initToast();
-    initDropdown();
-    initSearch();
-    initNotifications();
-    initActivity();
-
-    // Attach to window so we can use them in inline handlers
-    window.openModal = openModal;
-    window.closeModal = closeModal;
-    window.logActivity = logActivity;
-
-    // 2. Page Specific Initialization
-    const page = document.body.dataset.page;
-    if (page) {
-        console.log(`Initializing ${page} page...`);
-        switch (page) {
-            case 'dashboard':
-                initDashboard();
-                break;
-            case 'products':
-                initProducts();
-                break;
-            case 'deliveries':
-                initDeliveries();
-                break;
-            case 'receipts':
-                initReceipts();
-                break;
-        }
+    console.log('App initialized');
+    
+    // Auth initialization for protected pages
+    if (!window.location.pathname.includes('login.html')) {
+        initAuth();
+    } else {
+        initLoginForm();
+        initRegistrationForm();
+        initAuth(); // Also call initAuth to setup toggles
     }
 
-    // Initialize mock data for activity if empty
-    if (!localStorage.getItem('core_activity')) {
-        logActivity('Product Added', 'Amoxicillin 500mg');
-        logActivity('Delivery Shipped', 'Order #341');
-        logActivity('Receipt Validated', 'Supplier RX Pharma');
+    // Page-specific initialization
+    const path = window.location.pathname;
+    
+    if (path.includes('dashboard.html')) {
+        initDashboard();
+    } else if (path.includes('products.html')) {
+        initProducts();
+    } else if (path.includes('receipts.html')) {
+        initReceipts();
+    } else if (path.includes('deliveries.html')) {
+        initDeliveries();
+    } else if (path.includes('transfers.html')) {
+        initTransfers();
+    } else if (path.includes('adjustments.html')) {
+        initAdjustments();
     }
+    
+    // Common UI logic (sidebar, user menu, etc.)
+    initUI();
 });
 
-function initDashboard() { }
-function initProducts() { }
-function initDeliveries() { }
-function initReceipts() { }
+function initUI() {
+    // Mobile sidebar toggle
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('aside');
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    }
+
+    // User profile dropdown
+    const userProfileBtn = document.getElementById('user-profile-btn');
+    const userDropdown = document.getElementById('user-dropdown');
+    if (userProfileBtn && userDropdown) {
+        userProfileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => {
+            userDropdown.classList.add('hidden');
+        });
+    }
+}
