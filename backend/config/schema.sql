@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS products (
     category_id  INT             NULL,
     unit_of_measure VARCHAR(30)  NOT NULL DEFAULT 'Unit',
     reorder_level INT            NOT NULL DEFAULT 10,
+    expiry_date  DATE            NULL,
+    last_sold_at DATETIME        NULL,
     created_at   DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at   DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
@@ -204,6 +206,20 @@ CREATE TABLE IF NOT EXISTS stock_ledger (
     FOREIGN KEY (product_id)  REFERENCES products(id),
     FOREIGN KEY (location_id) REFERENCES locations(id),
     FOREIGN KEY (created_by)  REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- ─────────────────────────────────────────────
+-- ACTIVITY LOG
+-- ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS activity_log (
+    id          INT           AUTO_INCREMENT PRIMARY KEY,
+    user_id     INT           NULL,
+    action      VARCHAR(50)   NOT NULL,
+    entity_type VARCHAR(30)   NOT NULL,
+    entity_id   INT           NULL,
+    description TEXT          NULL,
+    created_at  TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 -- ─────────────────────────────────────────────

@@ -69,6 +69,14 @@ const stockLedgerModel = {
                 ...ledgerData, conn
             });
 
+            // 4. If this is a delivery/transfer_out, update last_sold_at
+            if (['delivery', 'transfer_out'].includes(ledgerData.movement_type)) {
+                await conn.query(
+                    'UPDATE products SET last_sold_at = NOW() WHERE id = ?',
+                    [product_id]
+                );
+            }
+
             if (isInternalConn) {
                 await conn.commit();
             }

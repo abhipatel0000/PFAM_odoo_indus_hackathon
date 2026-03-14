@@ -140,7 +140,7 @@
                         <div class="flex justify-between items-start relative z-10">
                             <div>
                                 <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Total Inventory</p>
-                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">1,248</h3>
+                                <h3 id="kpiTotalInventory" class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">—</h3>
                                 <div class="flex items-center text-primary text-xs font-bold tracking-tight bg-primary-container/30 w-fit px-2 py-1 rounded-lg">
                                     <i class="fas fa-arrow-up text-[10px] mr-1.5"></i>
                                     <span>+14.2%</span>
@@ -158,7 +158,7 @@
                         <div class="flex justify-between items-start relative z-10">
                             <div>
                                 <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Critical Alerts</p>
-                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">42</h3>
+                                <h3 id="kpiCriticalAlerts" class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">—</h3>
                                 <div class="flex items-center text-error text-xs font-bold tracking-tight bg-error-container/30 w-fit px-2 py-1 rounded-lg">
                                     <i class="fas fa-exclamation-triangle text-[10px] mr-1.5"></i>
                                     <span>Immediate Action</span>
@@ -176,7 +176,7 @@
                         <div class="flex justify-between items-start relative z-10">
                             <div>
                                 <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none mb-3">Today's Dispense</p>
-                                <h3 class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">326</h3>
+                                <h3 id="kpiTodayDispense" class="text-4xl font-headline font-black text-on-surface tracking-tight leading-none mb-2">—</h3>
                                 <div class="flex items-center text-secondary text-xs font-bold tracking-tight bg-secondary-container/30 w-fit px-2 py-1 rounded-lg">
                                     <i class="fas fa-prescription text-[10px] mr-1.5"></i>
                                     <span>Average Flow</span>
@@ -193,10 +193,10 @@
                     <div class="status-card bg-primary-container p-8 rounded-[2rem] border-2 border-primary/20 shadow-xl shadow-primary/10 overflow-hidden relative group">
                         <div class="relative z-10">
                             <p class="text-[10px] font-black text-on-primary-container/60 uppercase tracking-widest leading-none mb-3">System Health</p>
-                            <h3 class="text-4xl font-headline font-black text-on-primary-container tracking-tight leading-none mb-4">98.5%</h3>
+                            <h3 id="kpiSystemHealth" class="text-4xl font-headline font-black text-on-primary-container tracking-tight leading-none mb-4">—</h3>
                             
                             <div class="w-full bg-on-primary-container/10 h-2 rounded-full mb-3 overflow-hidden">
-                                <div class="bg-primary h-full w-[98.5%] rounded-full shadow-[0_0_10px_rgba(0,106,106,0.5)]"></div>
+                                <div id="kpiHealthBar" class="bg-primary h-full w-[0%] rounded-full shadow-[0_0_10px_rgba(0,106,106,0.5)] transition-all duration-1000"></div>
                             </div>
                             <p class="text-[10px] font-bold text-on-primary-container/80 uppercase tracking-tight">Node: Dispensary-Alpha-01</p>
                         </div>
@@ -217,59 +217,9 @@
                             <button class="px-6 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/40 text-[10px] font-black text-on-surface-variant uppercase tracking-widest hover:border-primary transition-all">Export Report</button>
                         </div>
 
-                        <div class="space-y-4">
-                            <!-- Movement Row 1 -->
-                            <div class="p-6 bg-surface-container border border-outline-variant/30 rounded-3xl flex items-center group hover:border-primary/30 transition-all hover:translate-x-1 duration-300">
-                                <div class="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 mr-6">
-                                    <i class="fas fa-plane-up"></i>
-                                </div>
-                                <div class="flex-1 min-w-0 pr-8">
-                                    <div class="flex items-center space-x-2 mb-1">
-                                        <h5 class="font-black text-on-surface text-sm uppercase tracking-tight truncate">Amoxicillin 500mg Batch A-82</h5>
-                                        <span class="px-2 py-0.5 rounded-md bg-secondary/10 text-[9px] font-black text-secondary uppercase tracking-widest">Urgent</span>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
-                                            <i class="fas fa-location-dot mr-1.5 opacity-40"></i>
-                                            <span>Central Hub <i class="fas fa-arrow-right mx-1 opacity-20"></i> Main Clinic</span>
-                                        </div>
-                                        <div class="flex items-center text-[10px] font-bold text-primary/70">
-                                            <i class="fas fa-clock mr-1.5 opacity-40"></i>
-                                            <span>In Transit - E.T.A 14:00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-lg font-headline font-black text-on-surface">5,000</p>
-                                    <p class="text-[9px] font-black text-on-surface-variant/40 uppercase tracking-widest">Caplets</p>
-                                </div>
-                            </div>
-
-                            <!-- Movement Row 2 -->
-                            <div class="p-6 bg-surface-container border border-outline-variant/30 rounded-3xl flex items-center group hover:border-primary/30 transition-all hover:translate-x-1 duration-300">
-                                <div class="h-12 w-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all duration-300 mr-6">
-                                    <i class="fas fa-truck-fast"></i>
-                                </div>
-                                <div class="flex-1 min-w-0 pr-8">
-                                    <div class="flex items-center space-x-2 mb-1">
-                                        <h5 class="font-black text-on-surface text-sm uppercase tracking-tight truncate">Insulin Glargine 300U/ml</h5>
-                                        <span class="px-2 py-0.5 rounded-md bg-primary/10 text-[9px] font-black text-primary uppercase tracking-widest">Cold Chain</span>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
-                                            <i class="fas fa-snowflake mr-1.5 text-blue-400"></i>
-                                            <span>External Supplier <i class="fas fa-arrow-right mx-1 opacity-20"></i> Receiving Bay</span>
-                                        </div>
-                                        <div class="flex items-center text-[10px] font-bold text-on-surface-variant">
-                                            <i class="fas fa-check-circle mr-1.5 text-green-500"></i>
-                                            <span>Docked - Inspecting</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-lg font-headline font-black text-on-surface">150</p>
-                                    <p class="text-[9px] font-black text-on-surface-variant/40 uppercase tracking-widest">Vials</p>
-                                </div>
+                        <div id="movementsContainer" class="space-y-4">
+                            <div class="p-6 bg-surface-container border border-outline-variant/30 rounded-3xl flex items-center justify-center">
+                                <p class="text-xs text-on-surface-variant/50 font-bold uppercase tracking-widest">Loading movements…</p>
                             </div>
                         </div>
 
@@ -293,7 +243,7 @@
                             <div class="w-48 p-6 bg-primary rounded-3xl relative overflow-hidden group">
                                 <div class="relative z-10">
                                     <p class="text-[9px] font-black text-on-primary/60 uppercase tracking-widest leading-none mb-2">Efficiency Rating</p>
-                                    <h5 class="text-2xl font-headline font-black text-on-primary">94.2%</h5>
+                                    <h5 id="kpiEfficiency" class="text-2xl font-headline font-black text-on-primary">—</h5>
                                 </div>
                                 <i class="fas fa-bolt-lightning absolute -right-3 -bottom-3 text-5xl text-on-primary/10 group-hover:scale-125 transition-transform duration-500"></i>
                             </div>
@@ -343,20 +293,10 @@
                                     <h4 class="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Synapse Alerts</h4>
                                 </div>
                                 
-                                <div class="space-y-4">
-                                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                                        <i class="fas fa-temperature-arrow-up text-error mt-1"></i>
-                                        <div>
-                                            <p class="text-xs font-bold text-white tracking-tight">Fridge-02 Temp Normalizing</p>
-                                            <p class="text-[9px] text-white/40 uppercase font-black tracking-widest mt-1">Resolved 12m ago</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                                        <i class="fas fa-circle-nodes text-primary mt-1"></i>
-                                        <div>
-                                            <p class="text-xs font-bold text-white tracking-tight">Odoo Sync Successful</p>
-                                            <p class="text-[9px] text-white/40 uppercase font-black tracking-widest mt-1">Pulse active</p>
-                                        </div>
+                                <div id="alertsContainer" class="space-y-4">
+                                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                        <i class="fas fa-spinner fa-spin text-primary mt-1"></i>
+                                        <p class="text-xs text-white/50">Loading alerts…</p>
                                     </div>
                                 </div>
 
@@ -371,6 +311,67 @@
                                 </div>
                             </div>
                             <div class="absolute -right-20 -bottom-20 h-64 w-64 bg-primary/10 rounded-full blur-[80px]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Advanced Feature Panels ── -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-10 mt-10">
+                    <!-- Expiry Alerts Panel -->
+                    <div class="bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10">
+                        <div class="flex items-center space-x-3 mb-8">
+                            <div class="h-10 w-10 rounded-xl bg-error/10 flex items-center justify-center text-error">
+                                <i class="fas fa-hourglass-end text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-on-surface uppercase tracking-[0.15em]">Expiry Alerts</h4>
+                                <p class="text-[9px] font-bold text-on-surface-variant/50 uppercase tracking-widest">Medicines nearing expiry</p>
+                            </div>
+                        </div>
+                        <div id="expiryAlertsContainer" class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+                            <p class="text-xs text-on-surface-variant/50 text-center py-4">Loading…</p>
+                        </div>
+                    </div>
+
+                    <!-- Dead Stock Panel -->
+                    <div class="bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10">
+                        <div class="flex items-center space-x-3 mb-8">
+                            <div class="h-10 w-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
+                                <i class="fas fa-box-open text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-on-surface uppercase tracking-[0.15em]">Dead Stock</h4>
+                                <p class="text-[9px] font-bold text-on-surface-variant/50 uppercase tracking-widest">No movement 90+ days</p>
+                            </div>
+                        </div>
+                        <div id="deadStockSummary" class="flex items-center space-x-6 mb-6">
+                            <div class="text-center">
+                                <p id="deadStockCount" class="text-3xl font-headline font-black text-on-surface">—</p>
+                                <p class="text-[9px] font-black text-on-surface-variant/50 uppercase tracking-widest">Items</p>
+                            </div>
+                            <div class="text-center">
+                                <p id="deadStockUnits" class="text-3xl font-headline font-black text-amber-500">—</p>
+                                <p class="text-[9px] font-black text-on-surface-variant/50 uppercase tracking-widest">Total Units</p>
+                            </div>
+                        </div>
+                        <div id="deadStockContainer" class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
+                            <p class="text-xs text-on-surface-variant/50 text-center py-4">Loading…</p>
+                        </div>
+                    </div>
+
+                    <!-- Smart Reorder Panel -->
+                    <div class="bg-surface-container-low border-2 border-outline-variant/30 rounded-[2.5rem] p-10">
+                        <div class="flex items-center space-x-3 mb-8">
+                            <div class="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                <i class="fas fa-cart-plus text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-on-surface uppercase tracking-[0.15em]">Smart Reorder</h4>
+                                <p class="text-[9px] font-bold text-on-surface-variant/50 uppercase tracking-widest">AI-suggested restock</p>
+                            </div>
+                        </div>
+                        <div id="reorderContainer" class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+                            <p class="text-xs text-on-surface-variant/50 text-center py-4">Loading…</p>
                         </div>
                     </div>
                 </div>
