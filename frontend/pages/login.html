@@ -38,6 +38,9 @@
         .form-control:focus {
             border-color: var(--primary-color);
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body style="background: var(--bg-darker);">
@@ -55,8 +58,32 @@
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
             </form>
+            <form id="signupForm" class="hidden">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
+            </form>
             <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
-                Don't have an account? <a href="#" style="color: var(--primary-color);">Sign Up</a>
+                <span id="loginPrompt">Don't have an account? <a href="#" id="showSignup" style="color: var(--primary-color);">Sign Up</a></span>
+                <span id="signupPrompt" class="hidden">Already have an account? <a href="#" id="showLogin" style="color: var(--primary-color);">Login</a></span>
             </p>
         </div>
     </div>
