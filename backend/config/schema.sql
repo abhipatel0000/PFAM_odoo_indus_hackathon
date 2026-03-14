@@ -1,8 +1,8 @@
 -- CoreInventory Database Schema
 -- Run: mysql -u root -p coreinventory < backend/config/schema.sql
 
-CREATE DATABASE IF NOT EXISTS coreinventory;
-USE coreinventory;
+-- CREATE DATABASE IF NOT EXISTS coreinventory;
+-- USE coreinventory;
 
 -- ─────────────────────────────────────────────
 -- 1. USERS

@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 // ── Initialise DB connection pool (tests connection on load) ──
 require('./config/db');

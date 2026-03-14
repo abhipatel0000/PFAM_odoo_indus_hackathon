@@ -83,7 +83,7 @@ document.getElementById('signupForm')?.addEventListener('submit', async function
         const res = await fetch(`${apiBase}/api/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, username, email, password, role: 'Inventory Manager' }),
+            body: JSON.stringify({ name, username, email, password, role: 'Manager' }),
         });
 
         const data = await res.json();
