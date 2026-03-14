@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CoreInventory - Dashboard Overview</title>
+    <title>MediSync - Pharmacy Dashboard</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="../css/core-theme.css" rel="stylesheet">
@@ -19,8 +19,8 @@
                 <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
             </div>
             <div>
-                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">CoreData</h1>
-                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Foundry System</p>
+                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">MediSync</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Pharmacy System</p>
             </div>
         </div>
         <nav class="space-y-2">
@@ -29,8 +29,8 @@
                 <span class="text-sm">Dashboard</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="products.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
-                <span class="text-sm">Inventory</span>
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">vaccines</span>
+                <span class="text-sm">Medicine Stock</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="deliveries.html">
                 <span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
@@ -118,6 +118,22 @@
                 </div>
             </div>
             </div>
+            <!-- Profile Dropdown -->
+            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
+                <div class="py-2">
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+                    </a>
+                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
+                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+                    </a>
+                </div>
+            </div>
+            </div>
         </div>
     </header>
 
@@ -150,7 +166,7 @@
                 </div>
                 <div class="z-10">
                     <p class="text-3xl font-headline font-black text-white">2,450</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Total Products</p>
+                    <p class="text-sm text-on-surface-variant font-medium mt-1">Total Medicines</p>
                 </div>
             </div>
 
@@ -165,7 +181,7 @@
                 </div>
                 <div class="z-10">
                     <p class="text-3xl font-headline font-black text-white">12</p>
-                    <p class="text-sm text-tertiary font-medium mt-1">Low Stock Alerts</p>
+                    <p class="text-sm text-tertiary font-medium mt-1">Expiring Soon / Low Stock</p>
                 </div>
             </div>
 
@@ -179,7 +195,7 @@
                 </div>
                 <div class="z-10">
                     <p class="text-3xl font-headline font-black text-white">18</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Pending Receipts</p>
+                    <p class="text-sm text-on-surface-variant font-medium mt-1">Pending Prescriptions</p>
                 </div>
             </div>
 
@@ -193,7 +209,7 @@
                 </div>
                 <div class="z-10">
                     <p class="text-3xl font-headline font-black text-white">34</p>
-                    <p class="text-sm text-on-surface-variant font-medium mt-1">Pending Deliveries</p>
+                    <p class="text-sm text-on-surface-variant font-medium mt-1">Recent Deliveries</p>
                 </div>
             </div>
         </div>
@@ -232,7 +248,7 @@
         <!-- Recent Operations Table -->
         <div class="glass-panel rounded-3xl overflow-hidden shadow-soft">
             <div class="px-8 py-6 bg-surface-container-lowest/50 flex justify-between items-center border-b border-outline-variant backdrop-blur-md">
-                <h3 class="font-headline font-bold text-xl text-white">Live Operations Stream</h3>
+                <h3 class="font-headline font-bold text-xl text-white">Live Pharmacy Operations</h3>
                 <div class="flex gap-3">
                     <button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high border border-outline-variant rounded-xl transition-all hover:text-primary">
                         <span class="material-symbols-outlined text-xl">refresh</span>
@@ -249,7 +265,7 @@
                         <tr class="bg-surface-container-lowest border-b border-outline-variant">
                             <th class="px-8 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Operation ID</th>
                             <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Type</th>
-                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Product</th>
+                            <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Medicine</th>
                             <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest text-right">Qty</th>
                             <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Warehouse</th>
                             <th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
@@ -269,10 +285,10 @@
                             </td>
                             <td class="px-6 py-5">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">AP</div>
+                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">AM</div>
                                     <div>
-                                        <p class="text-sm font-bold text-white">Anodized Plates</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">SKU: RD-998</p>
+                                        <p class="text-sm font-bold text-white">Amoxicillin 500mg</p>
+                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: B-998 | Exp: 2027</p>
                                     </div>
                                 </div>
                             </td>
@@ -299,10 +315,10 @@
                             </td>
                             <td class="px-6 py-5">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">CC</div>
+                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">PA</div>
                                     <div>
-                                        <p class="text-sm font-bold text-white">Carbon Casings</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">SKU: CC-102</p>
+                                        <p class="text-sm font-bold text-white">Paracetamol Syrup</p>
+                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: CC-102 | Exp: 2025</p>
                                     </div>
                                 </div>
                             </td>
@@ -329,10 +345,10 @@
                             </td>
                             <td class="px-6 py-5">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">ST</div>
+                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs font-bold text-on-surface-variant">CO</div>
                                     <div>
-                                        <p class="text-sm font-bold text-white">Steel Tubes</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">SKU: ST-440</p>
+                                        <p class="text-sm font-bold text-white">Cough Syrup</p>
+                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: ST-440 | Exp: 2026</p>
                                     </div>
                                 </div>
                             </td>
@@ -359,10 +375,10 @@
                             </td>
                             <td class="px-6 py-5">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-tertiary/30 flex items-center justify-center text-xs font-bold text-tertiary">LP</div>
+                                    <div class="w-10 h-10 rounded-xl bg-surface-container-high border border-tertiary/30 flex items-center justify-center text-xs font-bold text-tertiary">IB</div>
                                     <div>
-                                        <p class="text-sm font-bold text-white">Lithium Packs</p>
-                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">SKU: LP-BAT-01</p>
+                                        <p class="text-sm font-bold text-white">Ibuprofen 400mg</p>
+                                        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Batch: IB-01 | Exp: 2024 (EXPIRED)</p>
                                     </div>
                                 </div>
                             </td>
@@ -397,13 +413,13 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-10">
             <div class="md:col-span-2 space-y-4">
                 <div class="flex items-center justify-between pl-1">
-                    <h4 class="font-headline font-bold text-xl text-white">Stock Levels by Warehouse</h4>
+                    <h4 class="font-headline font-bold text-xl text-white">Stock Levels by Department</h4>
                     <button class="text-sm text-primary font-bold hover:underline flex items-center gap-1"><span class="material-symbols-outlined text-sm">map</span> View Heatmap</button>
                 </div>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="p-6 glass-panel rounded-3xl hover-lift relative overflow-hidden group">
                         <div class="flex items-center justify-between mb-8 relative z-10">
-                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">MAIN HUB - A</span>
+                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">MAIN PHARMACY</span>
                             <span class="text-sm text-white font-black bg-surface-container-high px-3 py-1 rounded-lg border border-outline-variant">88%</span>
                         </div>
                         <div class="h-3 bg-surface-container-high rounded-full overflow-hidden border border-outline-variant relative z-10">
@@ -415,7 +431,7 @@
                     </div>
                      <div class="p-6 glass-panel rounded-3xl hover-lift relative overflow-hidden group">
                         <div class="flex items-center justify-between mb-8 relative z-10">
-                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">LOGISTICS - B</span>
+                            <span class="text-sm font-bold text-on-surface-variant tracking-wider uppercase">EMERGENCY WARD</span>
                             <span class="text-sm text-white font-black bg-surface-container-high px-3 py-1 rounded-lg border border-outline-variant">42%</span>
                         </div>
                         <div class="h-3 bg-surface-container-high rounded-full overflow-hidden border border-outline-variant shadow-inner relative z-10">
@@ -481,11 +497,11 @@
         <div class="space-y-4">
             <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
                 <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="material-symbols-outlined">vaccines</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Add Product</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new product to inventory</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Add Medicine</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Register a new medicine to inventory</p>
                 </div>
             </a>
             <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
@@ -493,7 +509,7 @@
                     <span class="material-symbols-outlined">local_shipping</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Create Delivery</h3>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Supplier Delivery</h3>
                     <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
                 </div>
             </a>
@@ -502,8 +518,8 @@
                     <span class="material-symbols-outlined">receipt_long</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-tertiary transition-colors">Create Receipt</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Receive new stock from suppliers</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Dispense / Sale</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Record pharmacy sales or dispatch</p>
                 </div>
             </a>
         </div>
@@ -512,5 +528,6 @@
 
 <script type="module" src="../js/app.js"></script>
 </body>
+
 
 </html>

@@ -1,12 +1,12 @@
 const MOCK_DATA = [
-    { title: 'Paracetamol Tablet', type: 'Product', url: 'products.html' },
-    { title: 'Paracetamol Syrup', type: 'Product', url: 'products.html' },
-    { title: 'Amoxicillin 500mg', type: 'Product', url: 'products.html' },
-    { title: 'Dolo - 650', type: 'Product', url: 'products.html' },
+    { title: 'Amoxicillin 500mg Capsule', type: 'Medicine', url: 'products.html' },
+    { title: 'Paracetamol 500mg Tablet', type: 'Medicine', url: 'products.html' },
+    { title: 'Ibuprofen 200mg Syrup', type: 'Medicine', url: 'products.html' },
+    { title: 'Dolo - 650 Tablet', type: 'Medicine', url: 'products.html' },
     { title: 'Delivery #4812', type: 'Delivery', url: 'deliveries.html' },
     { title: 'Delivery #341', type: 'Delivery', url: 'deliveries.html' },
     { title: 'Supplier RX Pharma', type: 'Supplier', url: 'receipts.html' },
-    { title: 'Global Parts Inc.', type: 'Supplier', url: 'receipts.html' }
+    { title: 'Global Meds Inc.', type: 'Supplier', url: 'receipts.html' }
 ];
 
 export function initSearch() {

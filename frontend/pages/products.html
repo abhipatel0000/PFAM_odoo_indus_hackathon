@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CoreInventory | Product Inventory</title>
+    <title>MediSync | Medicine Inventory</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="../css/core-theme.css" rel="stylesheet">
@@ -19,8 +19,8 @@
                 <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
             </div>
             <div>
-                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">CoreData</h1>
-                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Foundry System</p>
+                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">MediSync</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Pharmacy System</p>
             </div>
         </div>
         <nav class="space-y-2">
@@ -29,8 +29,8 @@
                 <span class="text-sm">Dashboard</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high text-white font-medium shadow-md border border-outline-variant" href="#">
-                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
-                <span class="text-sm">Inventory</span>
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">vaccines</span>
+                <span class="text-sm">Medicine Stock</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="deliveries.html">
                 <span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
@@ -118,6 +118,22 @@
                 </div>
             </div>
             </div>
+            <!-- Profile Dropdown -->
+            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
+                <div class="py-2">
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+                    </a>
+                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
+                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+                    </a>
+                </div>
+            </div>
+            </div>
         </div>
     </header>
 
@@ -131,14 +147,14 @@
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
                     <span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20">Inventory</span>
                 </div>
-                <h2 class="text-4xl font-headline font-extrabold text-white tracking-tight glow-text">Product Inventory</h2>
+                <h2 class="text-4xl font-headline font-extrabold text-white tracking-tight glow-text">Medicine Inventory</h2>
             </div>
             <div class="flex gap-4">
                 <button class="flex items-center gap-2 px-5 py-3 glass-panel border border-outline-variant hover:border-primary transition-colors hover:text-primary rounded-xl text-sm font-semibold hover-lift hover:bg-surface-container-high text-white shadow-md">
                     <span class="material-symbols-outlined text-lg">file_download</span> Export CSV
                 </button>
                 <button class="flex items-center gap-2 px-6 py-3 btn-primary-gradient text-white rounded-xl text-sm font-bold hover-lift shadow-glow">
-                    <span class="material-symbols-outlined text-lg">add_box</span> Add Product
+                    <span class="material-symbols-outlined text-lg">add_box</span> Add Medicine
                 </button>
             </div>
         </div>
@@ -169,7 +185,7 @@
                     <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">warning</span>
                 </div>
                 <div class="mt-8 relative z-10">
-                    <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-2">Low Stock Alerts</p>
+                    <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-2">Expiring / Low Stock</p>
                     <h3 class="text-5xl font-headline font-black text-tertiary tracking-tighter">24</h3>
                     <p class="text-[10px] text-tertiary bg-tertiary/10 px-2 py-1 rounded inline-block font-bold mt-2 uppercase">Action Required</p>
                 </div>
@@ -182,7 +198,7 @@
                     <span class="material-symbols-outlined text-2xl text-secondary" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
                 </div>
                 <div class="mt-8 relative z-10">
-                    <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-2">Active Shipments</p>
+                    <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-2">Pending Deliveries</p>
                     <h3 class="text-5xl font-headline font-black text-white tracking-tighter">112</h3>
                     <p class="text-[11px] text-white/70 font-semibold mt-2 flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-secondary rounded-full"></span> 8 arriving today</p>
                 </div>
@@ -193,7 +209,7 @@
         <div class="glass-panel p-3 rounded-3xl flex items-center justify-between gap-4">
             <div class="flex items-center gap-2 border-r border-outline-variant pr-4">
                 <button class="px-5 py-2.5 bg-surface-container-highest text-white font-bold text-sm rounded-2xl shadow-sm flex items-center gap-2 border border-outline-variant border-b-2 border-b-primary">
-                    <span class="material-symbols-outlined text-lg">grid_view</span> All Products
+                    <span class="material-symbols-outlined text-lg">grid_view</span> All Medicines
                 </button>
                 <button class="px-5 py-2.5 text-on-surface-variant font-medium text-sm rounded-2xl hover:bg-surface-container-low hover:text-white transition-all">Tablets</button>
                 <button class="px-5 py-2.5 text-on-surface-variant font-medium text-sm rounded-2xl hover:bg-surface-container-low hover:text-white transition-all">Syrups</button>
@@ -218,8 +234,8 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-surface-container-lowest/80 border-b border-outline-variant backdrop-blur-md">
-                            <th class="px-8 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Product Name</th>
-                            <th class="px-6 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-center">SKU</th>
+                            <th class="px-8 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Medicine Name</th>
+                            <th class="px-6 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Batch Number</th>
                             <th class="px-6 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Category</th>
                             <th class="px-6 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Unit Price</th>
                             <th class="px-6 py-5 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Current Stock</th>
@@ -246,7 +262,7 @@
                                 <span class="px-3 py-1.5 bg-surface-container-high border border-outline-variant rounded-lg text-xs font-mono font-bold text-white group-hover:border-outline-variant transition-colors">PS-X100-22</span>
                             </td>
                             <td class="px-6 py-6">
-                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Electronics</span>
+                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Analgesic (Tablet)</span>
                             </td>
                             <td class="px-6 py-6 text-right">
                                 <span class="text-[15px] font-bold text-white glow-text">$299<span class="text-xs text-on-surface-variant">.00</span></span>
@@ -295,7 +311,7 @@
                                 <span class="px-3 py-1.5 bg-surface-container-high border border-outline-variant rounded-lg text-xs font-mono font-bold text-white group-hover:border-outline-variant transition-colors">ST-CB-90</span>
                             </td>
                             <td class="px-6 py-6">
-                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Hardware</span>
+                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Antipyretic (Tablet)</span>
                             </td>
                             <td class="px-6 py-6 text-right">
                                 <span class="text-[15px] font-bold text-white glow-text">$45<span class="text-xs text-on-surface-variant">.50</span></span>
@@ -344,7 +360,7 @@
                                 <span class="px-3 py-1.5 bg-surface-container-high border border-outline-variant rounded-lg text-xs font-mono font-bold text-white/50 group-hover:border-outline-variant transition-colors">FL-HE-009</span>
                             </td>
                             <td class="px-6 py-6">
-                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant opacity-70">Maintenance</span>
+                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant opacity-70">Cough Suppressant (Syrup)</span>
                             </td>
                             <td class="px-6 py-6 text-right">
                                 <span class="text-[15px] font-bold text-white/50">$112<span class="text-xs">.00</span></span>
@@ -393,7 +409,7 @@
                                 <span class="px-3 py-1.5 bg-surface-container-high border border-outline-variant rounded-lg text-xs font-mono font-bold text-white group-hover:border-outline-variant transition-colors">SG-IM-202</span>
                             </td>
                             <td class="px-6 py-6">
-                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Safety Gear</span>
+                                <span class="text-[13px] font-bold text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant">Antihypertensive (Tablet)</span>
                             </td>
                             <td class="px-6 py-6 text-right">
                                 <span class="text-[15px] font-bold text-white glow-text">$18<span class="text-xs text-on-surface-variant">.99</span></span>
@@ -430,7 +446,7 @@
 
             <!-- Pagination -->
             <div class="px-8 py-6 flex items-center justify-between bg-surface-container-lowest/50 border-t border-outline-variant backdrop-blur-md">
-                <p class="text-[13px] font-bold text-on-surface-variant">Showing <span class="text-white">1-4</span> of <span class="text-white">1,240</span> Products</p>
+                <p class="text-[13px] font-bold text-on-surface-variant">Showing <span class="text-white">1-4</span> of <span class="text-white">1,240</span> Medicines</p>
                 <div class="flex items-center gap-2">
                     <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-high hover:border-white text-on-surface-variant transition-all shadow-sm">
                         <span class="material-symbols-outlined text-lg">chevron_left</span>
@@ -450,7 +466,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto px-8 py-8 flex items-center justify-between border-t border-outline-variant/50 bg-background/80 backdrop-blur-sm z-10 w-full">
-        <p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">© 2024 Core Foundry System. All rights reserved.</p>
+        <p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">© 2024 MediSync Pharmacy System. All rights reserved.</p>
         <div class="flex items-center gap-8">
             <a class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors tracking-wide" href="#">Privacy Policy</a>
             <a class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors tracking-wide" href="#">System Status</a>
@@ -492,11 +508,11 @@
         <div class="space-y-4">
             <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
                 <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="material-symbols-outlined">vaccines</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Add Product</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new product to inventory</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Add Medicine</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Register a new medicine to inventory</p>
                 </div>
             </a>
             <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
@@ -504,7 +520,7 @@
                     <span class="material-symbols-outlined">local_shipping</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Create Delivery</h3>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Supplier Delivery</h3>
                     <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
                 </div>
             </a>
@@ -513,8 +529,8 @@
                     <span class="material-symbols-outlined">receipt_long</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-tertiary transition-colors">Create Receipt</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Receive new stock from suppliers</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Dispense / Sale</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Record pharmacy sales or dispatch</p>
                 </div>
             </a>
         </div>
@@ -523,5 +539,6 @@
 
 <script type="module" src="../js/app.js"></script>
 </body>
+
 
 </html>

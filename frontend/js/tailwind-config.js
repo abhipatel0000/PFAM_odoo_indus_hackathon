@@ -6,16 +6,16 @@ tailwind.config = {
                 "background": "#09090b", // zinc-950
                 "surface": "#18181b", // zinc-900
                 "surface-container-low": "#27272a", // zinc-800
-                "surface-container-lowest": "#18181b", 
+                "surface-container-lowest": "#09090b", 
                 "surface-container-high": "#3f3f46", // zinc-700
                 "on-surface": "#fafafa", // zinc-50
                 "on-surface-variant": "#a1a1aa", // zinc-400
-                "outline-variant": "#3f3f46", 
-                "primary": "#6366f1", // indigo-500
-                "primary-container": "#4338ca", // indigo-700
+                "outline-variant": "#27272a", 
+                "primary": "#3b82f6", // medical blue-500
+                "primary-container": "#1d4ed8", // blue-700
                 "on-primary": "#ffffff",
-                "on-primary-container": "#e0e7ff",
-                "secondary": "#10b981", // emerald-500
+                "on-primary-container": "#dbeafe",
+                "secondary": "#10b981", // medical emerald-500
                 "secondary-container": "#047857", // emerald-700
                 "on-secondary-container": "#d1fae5",
                 "tertiary": "#f43f5e", // rose-500
@@ -41,10 +41,10 @@ tailwind.config = {
                 "full": "9999px"
             },
             boxShadow: {
-                'glow': '0 0 20px -5px rgba(99, 102, 241, 0.4)',
+                'glow': '0 0 20px -5px rgba(59, 130, 246, 0.4)',
                 'glow-secondary': '0 0 20px -5px rgba(16, 185, 129, 0.4)',
                 'glow-tertiary': '0 0 20px -5px rgba(244, 63, 94, 0.4)',
-                'soft': '0 10px 40px -10px rgba(0,0,0,0.5)',
+                'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out',

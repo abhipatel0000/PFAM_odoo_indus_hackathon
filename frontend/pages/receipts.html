@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CoreInventory - Incoming Receipts</title>
+    <title>MediSync | Dispense & Sales Tracking</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="../css/core-theme.css" rel="stylesheet">
@@ -19,8 +19,8 @@
                 <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
             </div>
             <div>
-                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">CoreData</h1>
-                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Foundry System</p>
+                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">MediSync</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Pharmacy System</p>
             </div>
         </div>
         <nav class="space-y-2">
@@ -29,16 +29,16 @@
                 <span class="text-sm">Dashboard</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="products.html">
-                <span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
-                <span class="text-sm">Inventory</span>
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">vaccines</span>
+                <span class="text-sm">Medicine Stock</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="deliveries.html">
                 <span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
-                <span class="text-sm">Orders</span>
+                <span class="text-sm">Deliveries</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high text-white font-medium shadow-md border border-outline-variant" href="#">
                 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
-                <span class="text-sm">Suppliers</span>
+                <span class="text-sm">Dispense & Sales</span>
             </a>
             <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
                 <span class="material-symbols-outlined group-hover:text-primary transition-colors">assessment</span>
@@ -90,9 +90,25 @@
                 <img alt="Manager Profile" class="w-9 h-9 rounded-full bg-surface-container-highest object-cover ring-2 ring-primary ring-offset-2 ring-offset-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlDGZGcFNjAo2U47yvm_pBV91RDFQ_Q55ynzmviajhlYVyyR4enLnveKQyI6iZk4K3pB9lSPubjvdDwu7oufzUPn66qfF1KMDQ9cSZDAB-gjbhMsKArF4CurmjGDhRVay8IvW3IuFQG1cYl3Lj8s3jJ0JaNF-Cj_nN8xLMgmhfvGh4c067JOEcDkeeX1yd1hqYrxc7LEfEJbILIvPuYhh3vvoGpIGcvcEtBTL3VhAdYh-w5KAIwYNC7YYeSSodT6PwXqwwctSMbZMp"/>
                 <div class="text-left hidden md:block">
                     <p class="text-sm font-bold text-white leading-none">Alex Sterling</p>
-                    <p class="text-[10px] text-on-surface-variant mt-1 font-medium uppercase tracking-wider">Manager Profile</p>
+                    <p class="text-[10px] text-on-surface-variant mt-1 font-medium uppercase tracking-wider">Head Pharmacist</p>
                 </div>
                 <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+            </div>
+            <!-- Profile Dropdown -->
+            <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
+                <div class="py-2">
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">person</span> Profile
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">settings</span> Settings
+                    </a>
+                    <div class="h-[1px] bg-outline-variant/30 my-2"></div>
+                    <a href="#" onclick="toast.success('Logged out successfully');setTimeout(() => window.location.reload(), 1500);" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+                    </a>
+                </div>
+            </div>
             </div>
             <!-- Profile Dropdown -->
             <div id="profile-dropdown" class="hidden absolute top-full right-0 mt-3 w-48 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl z-[100] transform transition-all origin-top-right dropdown-menu">
@@ -119,11 +135,11 @@
         <div class="flex justify-between items-end mb-6">
             <div>
                 <div class="flex items-center gap-2 text-on-surface-variant text-sm mb-3">
-                    <span class="hover:text-white cursor-pointer transition-colors">Purchase</span>
+                    <span class="hover:text-white cursor-pointer transition-colors">Pharmacy</span>
                     <span class="material-symbols-outlined text-xs">chevron_right</span>
-                    <span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">Incoming Receipts</span>
+                    <span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">Medicine Dispense & Sales</span>
                 </div>
-                <h2 class="text-4xl font-headline font-extrabold tracking-tight text-white glow-text">Incoming Receipts</h2>
+                <h2 class="text-4xl font-headline font-extrabold tracking-tight text-white glow-text">Dispense & Sales</h2>
             </div>
             <div class="flex gap-3">
                 <button class="px-5 py-2.5 bg-surface-container-low text-white border border-outline-variant hover:border-primary transition-colors hover:text-primary rounded-xl text-sm font-semibold hover-lift hover:bg-surface-container-high shadow-md">Export Report</button>
@@ -139,25 +155,25 @@
                         <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary border border-primary/30 shadow-glow">
                             <span class="material-symbols-outlined">post_add</span>
                         </div>
-                        <h3 class="text-2xl font-headline font-bold text-white tracking-tight">Create New Receipt</h3>
+                        <h3 class="text-2xl font-headline font-bold text-white tracking-tight">Create New Dispense</h3>
                     </div>
 
                     <form class="space-y-8">
                         <!-- Supplier & Warehouse Info -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="space-y-3">
-                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Supplier Name</label>
+                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Patient Name / Department</label>
                                 <div class="relative group">
                                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
-                                    <input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-4 pl-12 pr-4 text-white text-[15px] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search suppliers..." type="text"/>
+                                    <input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-4 pl-12 pr-4 text-white text-[15px] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search patient or department..." type="text"/>
                                 </div>
                             </div>
                             <div class="space-y-3">
-                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Destination Hub</label>
+                                <label class="text-sm font-bold text-on-surface-variant uppercase tracking-widest pl-1">Dispensing Area</label>
                                 <select class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-4 px-5 text-white text-[15px] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none appearance-none cursor-pointer hover:bg-surface-container-high">
-                                    <option>North Logistics Hub - A1</option>
-                                    <option>Central Distribution Center</option>
-                                    <option>Eastern Regional Warehouse</option>
+                                    <option>Main Pharmacy Front Desk</option>
+                                    <option>Emergency Ward Dispensary</option>
+                                    <option>ICU Mobile Cart</option>
                                 </select>
                             </div>
                         </div>
@@ -165,7 +181,7 @@
                         <!-- Product List Table -->
                         <div class="space-y-5 pt-4">
                             <div class="flex items-center justify-between pl-1">
-                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Product Manifest</h4>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Prescription / Medicines</h4>
                                 <button class="text-primary text-sm font-bold flex items-center gap-2 hover:text-white transition-colors bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary" type="button">
                                     <span class="material-symbols-outlined text-[18px]">add</span> Add Line Item
                                 </button>
@@ -175,8 +191,8 @@
                                 <table class="w-full text-left">
                                     <thead>
                                         <tr class="text-[11px] uppercase tracking-widest text-on-surface-variant font-bold bg-surface-container-lowest/50 border-b border-outline-variant">
-                                            <th class="px-6 py-4">Product Name</th>
-                                            <th class="px-6 py-4">SKU / Batch</th>
+                                            <th class="px-6 py-4">Medicine Name</th>
+                                            <th class="px-6 py-4">Batch Number</th>
                                             <th class="px-6 py-4 text-right">Quantity</th>
                                             <th class="px-6 py-4 text-center">Unit</th>
                                             <th class="px-6 py-4"></th>
@@ -186,13 +202,13 @@
                                         <!-- Row 1 -->
                                         <tr class="group hover:bg-surface-container-high/50 transition-colors">
                                             <td class="px-6 py-4">
-                                                <input class="bg-surface-container-highest border border-outline-variant rounded-lg text-[15px] font-bold text-white focus:ring-2 focus:ring-primary outline-none px-4 py-2 w-full transition-all group-hover:border-primary/50" type="text" value="High-Performance Gasket A9"/>
+                                                <input class="bg-surface-container-highest border border-outline-variant rounded-lg text-[15px] font-bold text-white focus:ring-2 focus:ring-primary outline-none px-4 py-2 w-full transition-all group-hover:border-primary/50" type="text" value="Amoxicillin 500mg"/>
                                             </td>
                                             <td class="px-6 py-4">
-                                                <span class="text-xs text-on-surface-variant font-mono bg-surface-container-lowest px-2 py-1.5 rounded border border-outline-variant">GSK-2024-001</span>
+                                                <span class="text-xs text-on-surface-variant font-mono bg-surface-container-lowest px-2 py-1.5 rounded border border-outline-variant">B-AMOX-500</span>
                                             </td>
                                             <td class="px-6 py-4 text-right">
-                                                <input class="bg-primary/10 border border-primary/30 rounded-lg w-24 text-right text-[15px] font-bold text-primary py-2 px-3 focus:ring-2 focus:ring-primary outline-none transition-all shadow-[0_0_10px_rgba(99,102,241,0.1)] custom-scrollbar" type="number" value="150"/>
+                                                <input class="bg-primary/10 border border-primary/30 rounded-lg w-24 text-right text-[15px] font-bold text-primary py-2 px-3 focus:ring-2 focus:ring-primary outline-none transition-all shadow-[0_0_10px_rgba(99,102,241,0.1)] custom-scrollbar" type="number" value="20"/>
                                             </td>
                                             <td class="px-6 py-4 text-center">
                                                 <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Units</span>
@@ -206,7 +222,7 @@
                                         <!-- Row 2 -->
                                         <tr class="group hover:bg-surface-container-high/50 transition-colors">
                                             <td class="px-6 py-4">
-                                                <input class="bg-surface-container-lowest border border-outline-variant border-dashed rounded-lg text-[15px] font-medium text-white focus:ring-2 focus:ring-primary outline-none px-4 py-2 w-full transition-all group-hover:border-primary/50 placeholder:text-on-surface-variant/50" placeholder="Select product..." type="text"/>
+                                                <input class="bg-surface-container-lowest border border-outline-variant border-dashed rounded-lg text-[15px] font-medium text-white focus:ring-2 focus:ring-primary outline-none px-4 py-2 w-full transition-all group-hover:border-primary/50 placeholder:text-on-surface-variant/50" placeholder="Select medicine..." type="text"/>
                                             </td>
                                             <td class="px-6 py-4">
                                                 <span class="text-xs text-on-surface-variant/30 font-mono">—</span>
@@ -239,7 +255,7 @@
                                     Save Draft
                                 </button>
                                 <button class="px-8 py-3.5 btn-primary-gradient text-white rounded-xl text-[15px] font-bold hover-lift flex items-center gap-2" type="button">
-                                    Validate Receipt <span class="material-symbols-outlined text-[20px]">task_alt</span>
+                                    Validate Dispense <span class="material-symbols-outlined text-[20px]">task_alt</span>
                                 </button>
                             </div>
                         </div>
@@ -252,7 +268,7 @@
                 <!-- Recent Activity Grid -->
                 <div class="glass-panel p-6 rounded-3xl border border-outline-variant h-[450px] flex flex-col hover-lift">
                     <div class="flex items-center justify-between mb-6 border-b border-outline-variant/50 pb-4">
-                        <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Recent Receipts</h3>
+                        <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Recent Dispenses</h3>
                         <button class="text-primary text-xs font-bold hover:underline bg-primary/10 px-2 py-1 rounded">View All</button>
                     </div>
                     
@@ -261,10 +277,10 @@
                         <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-secondary/20 shadow-sm hover:border-secondary/50 transition-colors group cursor-pointer relative overflow-hidden">
                             <div class="absolute right-0 top-0 w-16 h-16 bg-secondary/10 rounded-bl-full group-hover:bg-secondary/20 transition-colors"></div>
                             <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92831</span>
+                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#DISP-92831</span>
                                 <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/30 uppercase tracking-widest glow-text">Validated</span>
                             </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Global Parts Inc.</h4>
+                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Emergency Ward</h4>
                             <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
                                 <span class="flex items-center gap-1.5 text-white/70">
                                     <span class="material-symbols-outlined text-[14px]">schedule</span> Today, 10:45 AM
@@ -277,10 +293,10 @@
                         <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-tertiary/20 shadow-sm hover:border-tertiary/50 transition-colors group cursor-pointer relative overflow-hidden border-l-4 border-l-tertiary">
                             <div class="absolute right-0 top-0 w-16 h-16 bg-tertiary/10 rounded-bl-full group-hover:bg-tertiary/20 transition-colors"></div>
                             <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92830</span>
+                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#DISP-92830</span>
                                 <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/30 uppercase tracking-widest animate-pulse">Draft</span>
                             </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-tertiary transition-colors">NexGen Metals</h4>
+                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-tertiary transition-colors">Outpatient Dept</h4>
                             <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
                                 <span class="flex items-center gap-1.5 text-white/70">
                                     <span class="material-symbols-outlined text-[14px]">schedule</span> Yesterday, 4:20 PM
@@ -292,10 +308,10 @@
                         <!-- Card 3 -->
                         <div class="bg-surface-container-low/80 p-5 rounded-2xl border border-secondary/20 shadow-sm hover:border-secondary/50 transition-colors group cursor-pointer relative overflow-hidden opacity-70 hover:opacity-100">
                             <div class="flex justify-between items-start mb-3 relative z-10">
-                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#REC-92829</span>
+                                <span class="text-xs font-bold text-white font-mono bg-surface-container-highest px-2 py-1 rounded">#DISP-92829</span>
                                 <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/30 uppercase tracking-widest">Validated</span>
                             </div>
-                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Summit Supplies</h4>
+                            <h4 class="text-[15px] font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">ICU</h4>
                             <div class="flex items-center justify-between mt-4 text-[11px] text-on-surface-variant font-medium relative z-10 border-t border-outline-variant/30 pt-3">
                                 <span class="flex items-center gap-1.5 text-white/70">
                                     <span class="material-symbols-outlined text-[14px]">schedule</span> Oct 12, 09:15 AM
@@ -309,7 +325,7 @@
                 <!-- Stats Visual -->
                 <div class="glass-panel p-8 rounded-3xl relative overflow-hidden hover-lift border-primary/20 bg-primary/10">
                     <div class="relative z-10">
-                        <p class="text-[11px] uppercase tracking-widest font-bold text-white mb-2">Monthly Throughput</p>
+                        <p class="text-[11px] uppercase tracking-widest font-bold text-white mb-2">Monthly Dispensed</p>
                         <p class="text-5xl font-headline font-black text-white glow-text tracking-tight">1,482</p>
                         <div class="mt-4 flex items-center gap-2">
                             <span class="text-xs bg-secondary/20 text-secondary border border-secondary/30 px-2 py-1 rounded font-bold">+12.5%</span>
@@ -330,7 +346,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
                 
                 <div class="relative p-6 text-white w-full">
-                    <p class="text-[11px] uppercase font-bold tracking-widest text-primary drop-shadow-[0_0_8px_rgba(99,102,241,0.8)] mb-2">North Logistics Hub</p>
+                    <p class="text-[11px] uppercase font-bold tracking-widest text-primary drop-shadow-[0_0_8px_rgba(99,102,241,0.8)] mb-2">Main Pharmacy</p>
                     <div class="flex justify-between items-end mb-3">
                          <h4 class="text-sm font-bold text-white drop-shadow-md">Current Utilization</h4>
                          <span class="text-lg font-black font-headline glow-text text-secondary">84%</span>
@@ -344,7 +360,7 @@
             <!-- Validations To-Do -->
             <div class="col-span-2 glass-panel p-8 rounded-3xl">
                 <div class="flex items-center justify-between mb-8 border-b border-outline-variant/30 pb-4">
-                    <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Pending Validations Floor Overview</h3>
+                    <h3 class="text-[13px] font-bold text-white uppercase tracking-widest pl-1">Pending Prescription Validations</h3>
                     <div class="flex gap-2 items-center bg-tertiary/10 border border-tertiary/30 px-3 py-1.5 rounded-lg">
                         <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-ping absolute"></span>
                         <span class="w-2.5 h-2.5 rounded-full bg-tertiary relative"></span>
@@ -358,8 +374,8 @@
                             <span class="material-symbols-outlined text-[28px]">precision_manufacturing</span>
                         </div>
                         <div>
-                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-primary transition-colors">Precision Bearings X2</p>
-                            <p class="text-xs text-on-surface-variant font-medium mt-1">Arrived 2h ago • Dock 4</p>
+                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-primary transition-colors">Paracetamol IV</p>
+                            <p class="text-xs text-on-surface-variant font-medium mt-1">Prescribed 2h ago • ICU</p>
                         </div>
                     </div>
                     <div class="p-5 bg-surface-container-low border border-outline-variant rounded-2xl flex items-center gap-5 hover:border-primary/50 transition-colors cursor-pointer group hover-lift shadow-sm">
@@ -367,8 +383,8 @@
                             <span class="material-symbols-outlined text-[28px]">fluid</span>
                         </div>
                         <div>
-                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-secondary transition-colors">Industrial Lubricant</p>
-                            <p class="text-xs text-on-surface-variant font-medium mt-1">Arrived 4h ago • Dock 2</p>
+                            <p class="text-[15px] font-bold text-white leading-tight group-hover:text-secondary transition-colors">Saline Solution</p>
+                            <p class="text-xs text-on-surface-variant font-medium mt-1">Prescribed 4h ago • ER</p>
                         </div>
                     </div>
                 </div>
@@ -407,11 +423,11 @@
         <div class="space-y-4">
             <a href="products.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container-high transition-all group">
                 <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="material-symbols-outlined">vaccines</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Add Product</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Register a new product to inventory</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Add Medicine</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Register a new medicine to inventory</p>
                 </div>
             </a>
             <a href="deliveries.html" class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all group">
@@ -419,7 +435,7 @@
                     <span class="material-symbols-outlined">local_shipping</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Create Delivery</h3>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Supplier Delivery</h3>
                     <p class="text-xs text-on-surface-variant mt-1">Start a new delivery workflow</p>
                 </div>
             </a>
@@ -428,8 +444,8 @@
                     <span class="material-symbols-outlined">receipt_long</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white group-hover:text-tertiary transition-colors">Create Receipt</h3>
-                    <p class="text-xs text-on-surface-variant mt-1">Receive new stock from suppliers</p>
+                    <h3 class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Dispense / Sale</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">Record pharmacy sales or dispatch</p>
                 </div>
             </a>
         </div>
@@ -438,5 +454,6 @@
 
 <script type="module" src="../js/app.js"></script>
 </body>
+
 
 </html>

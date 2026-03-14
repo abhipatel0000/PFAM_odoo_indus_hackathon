@@ -18,28 +18,28 @@ h1, h2, h3, h4, h5, h6, .font-headline {
 
 /* Glassmorphism Classes */
 .glass-effect, .glass-panel { 
-    background: rgba(24, 24, 27, 0.6); 
+    background: rgba(24, 24, 27, 0.7); 
     backdrop-filter: blur(16px); 
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(63, 63, 70, 0.4);
 }
 
 .glass-header {
     background: rgba(9, 9, 11, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(63, 63, 70, 0.4);
 }
 
 /* Gradients */
 .primary-gradient, .btn-primary-gradient { 
-    background: linear-gradient(135deg, #6366f1, #4f46e5); 
-    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+    background: linear-gradient(135deg, #3b82f6, #2563eb); 
+    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
 }
 
 .primary-gradient:hover {
-    background: linear-gradient(135deg, #4f46e5, #4338ca);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
     transform: translateY(-1px);
 }
 
