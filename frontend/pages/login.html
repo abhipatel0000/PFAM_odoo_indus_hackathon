@@ -1,92 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | CoreInventory</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 3rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-muted);
-        }
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            color: white;
-            outline: none;
-        }
-        .form-control:focus {
-            border-color: var(--primary-color);
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MediSync | Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/core-theme.css" rel="stylesheet">
+    <script src="../js/tailwind-config.js"></script>
 </head>
-<body style="background: var(--bg-darker);">
-    <div class="login-container">
-        <div class="login-card glass animate-fade-in">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Welcome Back</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
-            </form>
-            <form id="signupForm" class="hidden">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupUsername">Username</label>
-                    <input type="text" id="signupUsername" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
-            </form>
-            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
-                <span id="loginPrompt">Don't have an account? <a href="#" id="showSignup" style="color: var(--primary-color);">Sign Up</a></span>
-                <span id="signupPrompt" class="hidden">Already have an account? <a href="#" id="showLogin" style="color: var(--primary-color);">Login</a></span>
-            </p>
-        </div>
+<body class="min-h-screen bg-background text-on-surface flex items-center justify-center p-6 animate-fade-in">
+
+    <!-- Background Glows -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-primary rounded-full blur-[150px] opacity-10"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-secondary rounded-full blur-[150px] opacity-10"></div>
     </div>
+
+    <div class="relative w-full max-w-md">
+        <!-- Logo -->
+        <div class="flex items-center justify-center gap-3 mb-10">
+            <div class="w-14 h-14 primary-gradient rounded-2xl flex items-center justify-center shadow-glow">
+                <span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">dataset</span>
+            </div>
+            <div>
+                <h1 class="font-headline font-extrabold text-2xl text-white tracking-tight">MediSync</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase">Pharmacy System</p>
+            </div>
+        </div>
+
+        <!-- Login Card -->
+        <div class="glass-panel rounded-3xl p-8 shadow-2xl border border-outline-variant">
+            <h2 class="text-2xl font-headline font-bold text-white text-center mb-2">Welcome Back</h2>
+            <p class="text-on-surface-variant text-sm text-center mb-8">Sign in to your pharmacy dashboard</p>
+
+            <form id="loginForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest pl-1">Email, Phone, or Username</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors text-xl">person</span>
+                        <input id="login-identifier" class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-3.5 pl-12 pr-4 text-white text-[15px] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none placeholder:text-on-surface-variant/50" placeholder="Enter email, phone, or username" type="text" required autocomplete="username"/>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest pl-1">Password</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors text-xl">lock</span>
+                        <input id="login-password" class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-3.5 pl-12 pr-4 text-white text-[15px] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none placeholder:text-on-surface-variant/50" placeholder="Enter your password" type="password" required autocomplete="current-password"/>
+                    </div>
+                </div>
+
+                <div id="login-error" class="hidden text-sm text-tertiary bg-tertiary/10 border border-tertiary/30 px-4 py-3 rounded-xl"></div>
+
+                <button type="submit" id="login-btn" class="w-full btn-primary-gradient text-white py-3.5 rounded-xl font-bold text-[15px] hover-lift flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl">login</span> Sign In
+                </button>
+            </form>
+
+            <div class="mt-6 flex items-center justify-between text-sm">
+                <a href="forgot-password.html" class="text-primary font-semibold hover:underline">Forgot password?</a>
+                <a href="signup.html" class="text-on-surface-variant hover:text-white transition-colors">Create account <span class="text-primary font-bold">→</span></a>
+            </div>
+        </div>
+
+        <p class="text-center text-on-surface-variant/50 text-xs mt-8">&copy; 2026 MediSync Pharmacy System</p>
+    </div>
+
     <script src="../js/auth.js"></script>
 </body>
 </html>

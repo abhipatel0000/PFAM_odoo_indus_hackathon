@@ -12,10 +12,13 @@ CREATE TABLE IF NOT EXISTS users (
     name          VARCHAR(100)  NOT NULL,
     username      VARCHAR(60)   NOT NULL UNIQUE,
     email         VARCHAR(120)  NOT NULL UNIQUE,
+    phone         VARCHAR(20)   NULL,
     password_hash VARCHAR(255)  NOT NULL,
     role          ENUM('Manager', 'Staff') NOT NULL DEFAULT 'Staff',
+    is_verified   BOOLEAN       NOT NULL DEFAULT FALSE,
     otp_code      VARCHAR(6)    NULL,
     otp_expires   DATETIME      NULL,
+    otp_attempts  INT           NOT NULL DEFAULT 0,
     created_at    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

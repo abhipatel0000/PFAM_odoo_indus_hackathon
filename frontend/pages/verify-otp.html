@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MediSync | Verify OTP</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/core-theme.css" rel="stylesheet">
+    <script src="../js/tailwind-config.js"></script>
+    <style>
+        .otp-input {
+            width: 52px; height: 58px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Outfit', monospace;
+            letter-spacing: 0.05em;
+            caret-color: #3b82f6;
+        }
+        .otp-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.3); }
+        .otp-input.filled { border-color: #10b981; }
+        .otp-input.error { border-color: #f43f5e; animation: shake 0.4s ease; }
+        @keyframes shake { 0%,100%{ transform:translateX(0) } 25%{ transform:translateX(-6px) } 75%{ transform:translateX(6px) } }
+    </style>
+</head>
+<body class="min-h-screen bg-background text-on-surface flex items-center justify-center p-6 animate-fade-in">
+
+    <!-- Background Glows -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-primary rounded-full blur-[150px] opacity-10"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary rounded-full blur-[150px] opacity-10"></div>
+    </div>
+
+    <div class="relative w-full max-w-md">
+        <!-- Logo -->
+        <div class="flex items-center justify-center gap-3 mb-10">
+            <div class="w-14 h-14 primary-gradient rounded-2xl flex items-center justify-center shadow-glow">
+                <span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">dataset</span>
+            </div>
+            <div>
+                <h1 class="font-headline font-extrabold text-2xl text-white tracking-tight">MediSync</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase">Pharmacy System</p>
+            </div>
+        </div>
+
+        <!-- OTP Verification Card -->
+        <div class="glass-panel rounded-3xl p-8 shadow-2xl border border-outline-variant">
+            <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-3xl">shield</span>
+            </div>
+            <h2 class="text-2xl font-headline font-bold text-white text-center mb-2">Verify OTP</h2>
+            <p class="text-on-surface-variant text-sm text-center mb-2">We've sent a 6-digit OTP to</p>
+            <p id="otp-email-display" class="text-primary font-bold text-sm text-center mb-8">your email</p>
+
+            <form id="otpForm" class="space-y-6">
+                <!-- 6-Box OTP Input -->
+                <div class="flex items-center justify-center gap-3" id="otp-boxes">
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="0" autofocus/>
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="1"/>
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="2"/>
+                    <div class="w-3 h-0.5 bg-outline-variant rounded-full"></div>
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="3"/>
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="4"/>
+                    <input class="otp-input bg-surface-container-lowest border-2 border-outline-variant rounded-xl text-white outline-none transition-all" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp-idx="5"/>
+                </div>
+
+                <!-- Timer -->
+                <div class="text-center">
+                    <p class="text-on-surface-variant text-sm">
+                        OTP expires in <span id="otp-timer" class="text-primary font-bold font-mono">05:00</span>
+                    </p>
+                </div>
+
+                <div id="otp-error" class="hidden text-sm text-tertiary bg-tertiary/10 border border-tertiary/30 px-4 py-3 rounded-xl text-center"></div>
+                <div id="otp-success" class="hidden text-sm text-secondary bg-secondary/10 border border-secondary/30 px-4 py-3 rounded-xl text-center"></div>
+
+                <button type="submit" id="verify-btn" class="w-full btn-primary-gradient text-white py-3.5 rounded-xl font-bold text-[15px] hover-lift flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl">verified</span> Verify OTP
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-on-surface-variant text-sm">
+                    Didn't receive the code?
+                    <button id="resend-btn" disabled class="text-primary/50 font-bold cursor-not-allowed transition-colors ml-1">
+                        Resend OTP <span id="resend-timer" class="font-mono text-xs">(30s)</span>
+                    </button>
+                </p>
+            </div>
+        </div>
+
+        <p class="text-center mt-6">
+            <a href="login.html" class="text-on-surface-variant text-sm hover:text-white transition-colors">&larr; Back to Login</a>
+        </p>
+
+        <p class="text-center text-on-surface-variant/50 text-xs mt-6">&copy; 2026 MediSync Pharmacy System</p>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>
