@@ -9,14 +9,14 @@ async function initDB() {
         // Connect without database first
         const connection = await mysql.createConnection({
             host: process.env.DB_HOST || 'localhost',
-            port: process.env.DB_PORT || 3306,
+            port: process.env.DB_PORT || 3307,
             user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASSWORD || 'password',
+            password: process.env.DB_PASSWORD || 'Abhishek@oracle_2005',
             multipleStatements: true
         });
 
         const dbName = process.env.DB_NAME || 'coreinventory';
-        
+
         console.log(`Creating database ${dbName} if not exists...`);
         await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;`);
         await connection.query(`USE \`${dbName}\`;`);
@@ -26,7 +26,7 @@ async function initDB() {
 
         console.log('Executing schema.sql...');
         await connection.query(schemaSql);
-        
+
         console.log('Database initialized successfully.');
         await connection.end();
         process.exit(0);
