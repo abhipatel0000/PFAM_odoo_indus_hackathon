@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CoreInventory</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: var(--bg-dark);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+        }
+        .main-content {
+            padding: 2.5rem;
+            overflow-y: auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-card h4 {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        nav ul {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        nav ul li {
+            margin-bottom: 1rem;
+        }
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background: var(--glass-bg);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <h2 style="color: var(--primary-color);">CoreInv</h2>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="receipts.html">Receipts</a></li>
+                    <li><a href="deliveries.html">Deliveries</a></li>
+                    <li><a href="transfers.html">Transfers</a></li>
+                    <li><a href="#" id="logoutBtn" style="color: var(--accent-color);">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; height: auto; background: none;">
+                <h3>Inventory Overview</h3>
+                <div id="userInfo" style="color: var(--text-muted);">Welcome, Manager</div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h4>Total Products</h4>
+                    <div class="value" id="totalProducts">1,280</div>
+                </div>
+                <div class="stat-card glass">
+                    <h4>Low Stock</h4>
+                    <div class="value" style="color: var(--accent-color);">12</div>
+                </div>
+                <div class="stat-card glass">
+                    <h4>Pending Receipts</h4>
+                    <div class="value">05</div>
+                </div>
+                <div class="stat-card glass">
+                    <h4>Deliveries (Today)</h4>
+                    <div class="value">08</div>
+                </div>
+            </div>
+
+            <section class="glass" style="padding: 2rem;">
+                <h4>Recent Operations</h4>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; text-align: left;">
+                    <thead style="border-bottom: 1px solid var(--glass-border); color: var(--text-muted);">
+                        <tr>
+                            <th style="padding: 1rem;">Document</th>
+                            <th>Type</th>
+                            <th>Warehouse</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="operationsTable">
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 1rem;">WH/IN/001</td>
+                            <td>Receipt</td>
+                            <td>Main Warehouse</td>
+                            <td><span style="color: #10b981;">Done</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 1rem;">WH/OUT/004</td>
+                            <td>Delivery</td>
+                            <td>Main Warehouse</td>
+                            <td><span style="color: #f59e0b;">Ready</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
