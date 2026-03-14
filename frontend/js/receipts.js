@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { apiCall } from './api.js';
 
 export function initReceipts() {
     console.log('Initializing Receipts Module');
@@ -17,8 +17,8 @@ export function initReceipts() {
 
     async function loadProducts() {
         try {
-            const products = await api.getProducts();
-            allProducts = products;
+            const response = await apiCall('/products');
+            allProducts = response.data || response || [];
             console.log('Loaded products for receipts:', allProducts.length);
         } catch (error) {
             console.error('Failed to load products:', error);

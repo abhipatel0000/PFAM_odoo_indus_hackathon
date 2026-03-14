@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { apiCall } from './api.js';
 
 export function initDeliveries() {
     console.log('Initializing Deliveries Module');
@@ -15,8 +15,8 @@ export function initDeliveries() {
 
     async function loadProducts() {
         try {
-            const products = await api.getProducts();
-            allProducts = products;
+            const response = await apiCall('/products');
+            allProducts = response.data || response || [];
             console.log('Loaded products for deliveries:', allProducts.length);
         } catch (error) {
             console.error('Failed to load products:', error);

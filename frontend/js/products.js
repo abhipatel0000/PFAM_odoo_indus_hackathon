@@ -1,6 +1,22 @@
-document.addEventListener('DOMContentLoaded', async function() {
+import { apiCall } from './api.js';
+
+export function initProducts() {
+    console.log('Initializing Products Module');
+
     const grid = document.getElementById('productGrid');
-    
+    if (!grid) return;
+
+    async function loadProducts() {
+        try {
+            const response = await apiCall('/products');
+            const data = response.data || response || [];
+            renderProducts(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            grid.innerHTML = '<p class="text-error">Error connecting to server to load products.</p>';
+        }
+    }
+
     function renderProducts(data) {
         if (!data || data.length === 0) {
             grid.innerHTML = '<p>No products found.</p>';
@@ -19,15 +35,5 @@ document.addEventListener('DOMContentLoaded', async function() {
         `).join('');
     }
 
-    try {
-        const response = await apiCall('/products');
-        if (response.success && response.data) {
-            renderProducts(response.data);
-        } else {
-            grid.innerHTML = '<p class="text-error">Failed to load products.</p>';
-        }
-    } catch (error) {
-        console.error('Error fetching products:', error);
-        grid.innerHTML = '<p class="text-error">Error connecting to server to load products.</p>';
-    }
-});
+    loadProducts();
+}
