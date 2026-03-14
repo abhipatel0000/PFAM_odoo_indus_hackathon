@@ -1,349 +1,372 @@
-﻿<!DOCTYPE html>
-
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CoreInventory | Delivery Workflow</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="../js/tailwind-config.js"></script>
-<link href="../css/core-theme.css" rel="stylesheet">
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CoreInventory | Delivery Workflow</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/core-theme.css" rel="stylesheet">
+    <script src="../js/tailwind-config.js"></script>
 </head>
-<body class="flex min-h-screen">
-<!-- SideNavBar (Shared Component) -->
-<aside class="w-64 bg-surface-container-low flex flex-col border-none sticky top-0 h-screen">
-<div class="p-6 flex flex-col gap-1">
-<div class="flex items-center gap-3 mb-8">
-<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">package_2</span>
-</div>
-<div>
-<h1 class="text-on-surface font-bold text-lg leading-tight">CoreInventory</h1>
-<p class="text-on-surface-variant text-xs font-label">Core Foundry System</p>
-</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="text-sm font-medium">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">inventory_2</span>
-<span class="text-sm font-medium">Inventory</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary-container text-on-primary-fixed-variant font-semibold" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
-<span class="text-sm">Orders</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="text-sm font-medium">Suppliers</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">assessment</span>
-<span class="text-sm font-medium">Reports</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-sm font-medium">Settings</span>
-</a>
-</nav>
-<button class="mt-6 flex items-center justify-center gap-2 btn-primary-gradient text-on-primary py-3 px-4 rounded-xl font-medium shadow-sm">
-<span class="material-symbols-outlined text-sm">add</span>
-<span class="text-sm">Add New Item</span>
-</button>
-</div>
-<div class="mt-auto p-6 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">help_outline</span>
-<span class="text-sm font-medium">Support</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
-<span class="material-symbols-outlined">logout</span>
-<span class="text-sm font-medium">Logout</span>
-</a>
-</div>
+<body class="flex min-h-screen animate-fade-in bg-background text-on-surface selection:bg-primary selection:text-white">
+
+<!-- SideNavBar -->
+<aside class="w-64 glass-panel border-r border-outline-variant text-on-surface flex flex-col fixed h-full z-30">
+    <div class="px-6 py-8">
+        <div class="flex items-center gap-4 mb-10 hover-lift cursor-pointer">
+            <div class="w-12 h-12 primary-gradient rounded-xl flex items-center justify-center shadow-glow">
+                <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
+            </div>
+            <div>
+                <h1 class="font-headline font-extrabold text-xl leading-tight text-white tracking-tight">CoreData</h1>
+                <p class="text-[10px] text-primary-container tracking-[0.2em] font-bold uppercase mt-1">Foundry System</p>
+            </div>
+        </div>
+        <nav class="space-y-2">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="dashboard.html">
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+                <span class="text-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="products.html">
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
+                <span class="text-sm">Inventory</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high text-white font-medium shadow-md border border-outline-variant" href="#">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+                <span class="text-sm">Orders</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="receipts.html">
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">local_shipping</span>
+                <span class="text-sm">Suppliers</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">assessment</span>
+                <span class="text-sm">Reports</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-all text-on-surface-variant hover:text-white group" href="#">
+                <span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+                <span class="text-sm">Settings</span>
+            </a>
+        </nav>
+    </div>
+    <div class="mt-auto px-6 py-6 border-t border-outline-variant">
+        <button class="w-full btn-primary-gradient text-white py-3.5 rounded-xl text-sm font-bold mb-6 hover-lift flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">add</span> Add New Item
+        </button>
+        <div class="space-y-1">
+            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
+                <span class="material-symbols-outlined text-sm">help_outline</span> Support
+            </a>
+            <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-colors text-sm" href="#">
+                <span class="material-symbols-outlined text-sm">logout</span> Logout
+            </a>
+        </div>
+    </div>
 </aside>
-<main class="flex-1 flex flex-col h-screen overflow-hidden">
-<!-- TopNavBar (Shared Component) -->
-<header class="h-16 flex items-center justify-between px-8 bg-surface border-none z-10">
-<div class="flex items-center gap-4 w-1/3">
-<div class="relative w-full max-w-sm">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
-<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Search orders, SKUs..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-4">
-<button class="text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined">history</span>
-</button>
-</div>
-<div class="h-8 w-[1px] bg-outline-variant opacity-30"></div>
-<div class="flex items-center gap-3">
-<span class="text-sm font-medium text-on-surface">Manager Profile</span>
-<img class="w-8 h-8 rounded-full object-cover" data-alt="Manager profile photo in professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6YK-5UCbh10llNPicex_0WqqzPlQFJa5zqsI5LeUc0z2Jrq_XmHTnce8r-7PVhThYN4G7eAXQH84tbHTaWnYVnFNP3ZmxLPaPlVPCH_4hBKNUJXeqWoQwxJ6rosHS6v5Y0hgXgkDPusdlN2ob6z-plo-UTCk7G1fccNeeKIg5kCyxy0mZY9FnF2Ptw3vTPkShUQqgHXv6iqSAmjmLYx5p7Fsi2PHmbB3esMcnrb13FQdlw7qbIBi6nEOSbUS6kpgRk3ZkPvPBucTu"/>
-</div>
-</div>
-</header>
-<!-- Main Workspace -->
-<div class="flex-1 overflow-y-auto px-8 py-6 custom-scrollbar">
-<!-- Breadcrumbs & Header -->
-<div class="mb-8">
-<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-2">
-<span>Orders</span>
-<span class="material-symbols-outlined text-xs">chevron_right</span>
-<span>Outbound Delivery</span>
-<span class="material-symbols-outlined text-xs">chevron_right</span>
-<span class="text-on-surface font-semibold">WH-DLV-88291</span>
-</div>
-<div class="flex justify-between items-end">
-<div>
-<h2 class="text-3xl font-bold tracking-tight text-primary">Delivery Workflow</h2>
-<p class="text-on-surface-variant mt-1">Warehouse Section A-4 â€¢ Priority Shipping</p>
-</div>
-<div class="flex items-center gap-4">
-<div class="flex flex-col items-end">
-<span class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Estimated Time</span>
-<span class="text-lg font-bold text-on-surface">14:20 Remaining</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Workflow Progress Stepper -->
-<div class="grid grid-cols-3 gap-4 mb-10">
-<div class="relative bg-secondary-container rounded-xl p-5 flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-on-secondary-container text-secondary-container flex items-center justify-center">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div>
-<p class="text-xs font-label text-on-secondary-fixed-variant opacity-70 uppercase tracking-tighter">Step 01</p>
-<h3 class="font-bold text-on-secondary-container">Generate Slip</h3>
-</div>
-</div>
-<div class="relative bg-surface-container-lowest rounded-xl p-5 flex items-center gap-4 ring-2 ring-primary">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center">
-<span class="material-symbols-outlined">conveyor_belt</span>
-</div>
-<div>
-<p class="text-xs font-label text-on-primary-fixed-variant opacity-70 uppercase tracking-tighter">Step 02</p>
-<h3 class="font-bold text-primary">Pick Items</h3>
-</div>
-<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rotate-45"></div>
-</div>
-<div class="relative bg-surface-container-low rounded-xl p-5 flex items-center gap-4 opacity-60">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
-<span class="material-symbols-outlined">inventory</span>
-</div>
-<div>
-<p class="text-xs font-label text-on-surface-variant uppercase tracking-tighter">Step 03</p>
-<h3 class="font-bold text-on-surface-variant">Validate &amp; Pack</h3>
-</div>
-</div>
-</div>
-<!-- Dashboard Content Grid -->
-<div class="grid grid-cols-12 gap-8">
-<!-- Left: Picking List (Bento-style main card) -->
-<div class="col-span-8 space-y-6">
-<div class="bg-surface-container-lowest rounded-2xl p-0 overflow-hidden shadow-sm">
-<div class="px-6 py-5 bg-surface-container-low flex justify-between items-center">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">list_alt</span>
-<h3 class="font-bold text-lg">Pick List (4 Items)</h3>
-</div>
-<div class="flex gap-2">
-<span class="px-3 py-1 bg-tertiary-fixed text-tertiary rounded-full text-xs font-semibold">High Priority</span>
-</div>
-</div>
-<div class="p-2">
-<table class="w-full text-left">
-<thead>
-<tr class="text-on-surface-variant font-label text-xs uppercase tracking-widest border-none">
-<th class="px-4 py-4 font-semibold">SKU / Item Details</th>
-<th class="px-4 py-4 font-semibold">Bin Location</th>
-<th class="px-4 py-4 font-semibold text-center">Ordered</th>
-<th class="px-4 py-4 font-semibold text-right w-32">Picked Qty</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-surface-container-low">
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-4 py-5">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Modern white minimalist electronic device" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJE7tBuYa2E1jBaRJ0wRQ6yfVMsgz25Khy_EPGa89H-hvIJ6MfSpci1jw6OxY_98nYSa2C21YuldUQrZbh3VypRQmpaxO7EkN40ffbUO4dL2VNC27cWO8ieII4pgcc6nIKqCagT3eI-JwnMeoKeAGOtZCtF_xv-j10GIeXom-UpSPnoT8FsebdncC7c9CRZrFb3Qzpl7UOBkb8ZZwQrAZsK4HXPlcE0zwdFgM0iP77SNX_LVW4G16hhGx5Ceicb3hNgI6EgHsiKJIo"/>
-</div>
-<div>
-<p class="font-bold text-on-surface">CTR-442-XM</p>
-<p class="text-xs text-on-surface-variant">Ceramic Hub Controller</p>
-</div>
-</div>
-</td>
-<td class="px-4 py-5">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-surface-container-highest font-mono text-sm font-bold">
-<span class="material-symbols-outlined text-xs">location_on</span>
-                                                A-12-04
+
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 bg-background min-h-screen">
+    <!-- TopNavBar -->
+    <header class="sticky top-0 z-20 glass-header px-8 h-20 flex items-center justify-between">
+        <div class="flex items-center bg-surface-container-low px-4 py-2.5 rounded-2xl w-[400px] border border-outline-variant focus-within:ring-2 ring-primary transition-all">
+            <span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/60 text-white ml-2 outline-none" placeholder="Search orders, SKUs..." type="text"/>
+            <div class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] text-on-surface-variant font-mono">⌘K</div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4 text-on-surface-variant">
+                <button class="relative hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-tertiary rounded-full border-2 border-background animate-pulse"></span>
+                </button>
+                <button class="hover:text-primary transition-colors p-2 hover:bg-surface-container-low rounded-lg">
+                    <span class="material-symbols-outlined">history</span>
+                </button>
+            </div>
+            <div class="h-8 w-[1px] bg-outline-variant"></div>
+            <div class="flex items-center gap-4 cursor-pointer hover:bg-surface-container-low p-1.5 pr-4 rounded-full transition-colors border border-transparent hover:border-outline-variant">
+                <img alt="Manager Profile" class="w-9 h-9 rounded-full bg-surface-container-highest object-cover ring-2 ring-primary ring-offset-2 ring-offset-background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwq8Lal-Lv43B3Pj3zYxFmnnySvLuEs_fhAh9PqBJ0I1p1AvUwx1qKFC6_FJ4xDPrweMunYItHXT7x6jqtdgYrbANObnahG1dbftH6j4tdYtvbhUYvg-4G9PTie5EqGDLVEGejma3w9jwykqQxTE4U0_4IxQ6hresJNXaHgrHvntMNeSfed-xzDsVBIKwskh72KwO68q469XWTTB66_jrmPAuRTpDD8Hjbkttucy7oJvKxKJrui15gyQxsVmHNFR8KOE4Buqz0S2ua"/>
+                <div class="text-left hidden md:block">
+                    <p class="text-sm font-bold text-white leading-none">Prutha Patel</p>
+                    <p class="text-[10px] text-on-surface-variant mt-1 font-medium">Lead Operations</p>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="px-8 py-8 space-y-8 animate-fade-in max-w-[1600px] mx-auto">
+        
+        <!-- Breadcrumbs & Header -->
+        <div class="mb-8">
+            <div class="flex items-center gap-2 text-on-surface-variant text-sm mb-3">
+                <span class="hover:text-white cursor-pointer transition-colors">Orders</span>
+                <span class="material-symbols-outlined text-xs">chevron_right</span>
+                <span class="hover:text-white cursor-pointer transition-colors">Outbound Delivery</span>
+                <span class="material-symbols-outlined text-xs">chevron_right</span>
+                <span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded border border-primary/20">WH-DLV-88291</span>
+            </div>
+            <div class="flex justify-between items-end">
+                <div>
+                    <h2 class="text-4xl font-headline font-extrabold tracking-tight text-white glow-text">Delivery Workflow</h2>
+                    <p class="text-on-surface-variant mt-2 text-sm">Warehouse Section A-4 • Priority Shipping</p>
+                </div>
+                <div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+                    <div class="flex flex-col items-end">
+                        <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Time Remaining</span>
+                        <span class="text-2xl font-headline font-black text-tertiary animate-pulse-slow tracking-tight">14:20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Progress Stepper -->
+        <div class="grid grid-cols-3 gap-6 mb-10">
+            <!-- Completed Step -->
+            <div class="relative glass-panel rounded-2xl p-6 flex items-center gap-5 border border-secondary/30 bg-secondary/5 hover-lift">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-emerald-400 text-white flex items-center justify-center shadow-glow-secondary">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Step 01</p>
+                    <h3 class="font-bold text-white text-lg">Generate Slip</h3>
+                </div>
+            </div>
+            
+            <!-- Active Step -->
+            <div class="relative glass-panel rounded-2xl p-6 flex items-center gap-5 border border-primary bg-primary/10 hover-lift shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-indigo-400 text-white flex items-center justify-center shadow-glow transform scale-110">
+                    <span class="material-symbols-outlined">conveyor_belt</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Step 02</p>
+                    <h3 class="font-bold text-white text-lg">Pick Items</h3>
+                </div>
+                <div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-background border-t border-r border-primary rotate-45 z-10"></div>
+            </div>
+            
+            <!-- Pending Step -->
+            <div class="relative glass-panel rounded-2xl p-6 flex items-center gap-5 border border-outline-variant opacity-60 grayscale hover:grayscale-0 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined">inventory</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Step 03</p>
+                    <h3 class="font-bold text-on-surface-variant text-lg">Validate & Pack</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content Grid -->
+        <div class="grid grid-cols-12 gap-8 pb-10">
+            <!-- Left: Picking List -->
+            <div class="col-span-8 space-y-8">
+                <div class="glass-panel text-white rounded-3xl p-0 overflow-hidden shadow-soft">
+                    <div class="px-8 py-6 bg-surface-container-lowest/50 flex justify-between items-center border-b border-outline-variant backdrop-blur-sm">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary text-2xl">list_alt</span>
+                            <h3 class="font-headline font-bold text-xl">Active Pick List</h3>
+                            <span class="bg-surface-container-high px-3 py-1 rounded-lg text-xs font-bold font-mono">4 Items</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="px-4 py-1.5 bg-tertiary/10 border border-tertiary/30 text-tertiary rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-glow-tertiary">High Priority</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-on-surface-variant font-bold text-xs uppercase tracking-widest border-b border-outline-variant">
+                                    <th class="px-6 py-4">SKU / Item Details</th>
+                                    <th class="px-6 py-4">Bin Location</th>
+                                    <th class="px-6 py-4 text-center">Ordered</th>
+                                    <th class="px-6 py-4 text-right w-40">Picked Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant">
+                                <!-- Item 1 -->
+                                <tr class="group">
+                                    <td class="px-6 py-6">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-14 h-14 rounded-xl bg-surface-container-high overflow-hidden border border-outline-variant group-hover:border-primary transition-colors">
+                                                <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" data-alt="Modern white minimalist electronic device" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJE7tBuYa2E1jBaRJ0wRQ6yfVMsgz25Khy_EPGa89H-hvIJ6MfSpci1jw6OxY_98nYSa2C21YuldUQrZbh3VypRQmpaxO7EkN40ffbUO4dL2VNC27cWO8ieII4pgcc6nIKqCagT3eI-JwnMeoKeAGOtZCtF_xv-j10GIeXom-UpSPnoT8FsebdncC7c9CRZrFb3Qzpl7UOBkb8ZZwQrAZsK4HXPlcE0zwdFgM0iP77SNX_LVW4G16hhGx5Ceicb3hNgI6EgHsiKJIo"/>
                                             </div>
-</td>
-<td class="px-4 py-5 text-center font-bold text-on-surface">12</td>
-<td class="px-4 py-5">
-<input class="w-full text-right py-2 px-3 bg-surface-container-low border-none rounded-lg text-secondary font-bold focus:ring-1 focus:ring-secondary focus:bg-white transition-all" type="number" value="12"/>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-4 py-5">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Premium black wireless headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB1GJsMu4YVSzocj40Rdcg3R4HMxNVaAQ5e0V3lY43ZCgKTOP_Gw2rNA6OK7sHHv6Kxe47SoL0YHWlHpJwFJ9eORln3rcCgdXjl9xDjEpHLbIdyiVbG2vKyY6tqHtygcrJsIYiHDxxksQBX9bwSHjqoHJcMYQtsO5U3Q9AbIy0M0CGceZcf_ExnTiwdw9_AuD8ZCTqxqLMerWd6GjympyU0iAx5LTy7tznae0vzVDqjRVd3Z7f5RUfAkbswgKhGA3sMp-_vuRqJpVO"/>
-</div>
-<div>
-<p class="font-bold text-on-surface">HD-PX7-PRO</p>
-<p class="text-xs text-on-surface-variant">Acoustic Over-Ear Units</p>
-</div>
-</div>
-</td>
-<td class="px-4 py-5">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-surface-container-highest font-mono text-sm font-bold">
-<span class="material-symbols-outlined text-xs">location_on</span>
-                                                B-04-11
+                                            <div>
+                                                <p class="font-bold text-white text-[15px] group-hover:text-primary transition-colors">CTR-442-XM</p>
+                                                <p class="text-xs text-on-surface-variant mt-1 font-medium">Ceramic Hub Controller</p>
                                             </div>
-</td>
-<td class="px-4 py-5 text-center font-bold text-on-surface">4</td>
-<td class="px-4 py-5">
-<input class="w-full text-right py-2 px-3 bg-surface-container-high border-none rounded-lg text-primary font-bold focus:ring-1 focus:ring-primary focus:bg-white transition-all ring-1 ring-primary/20" placeholder="0" type="number"/>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-4 py-5">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Luxury mechanical wristwatch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-dr6muNRN5hP3xW_7e3gnkF2kzSt9CBT2e2lOuLYEZdzPJNM6neVBSFm-O9EnzZ5z6rLT__DJte3QljhVcZdO_v19ckS1KaSfzTJDLeT7M2C_XwWj28Yy3ceW8NJN6WKiF_488DXNFi3cPd-N9Njte9Iy_Zop9u2JoNrpvLa4Y8sTypMqPI_1vqgDKT8PLoTpreWSZ2iTC44-95dG29hzHR2D3uqKnqtNAqLV8C3EFatWdA4MV2dXpvL8agJRw962B7Iogpx8L-GA"/>
-</div>
-<div>
-<p class="font-bold text-on-surface">TIM-991-CH</p>
-<p class="text-xs text-on-surface-variant">Precision Chronograph</p>
-</div>
-</div>
-</td>
-<td class="px-4 py-5">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-surface-container-highest font-mono text-sm font-bold">
-<span class="material-symbols-outlined text-xs">location_on</span>
-                                                A-02-15
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 border-none">
+                                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant font-mono text-xs font-bold group-hover:border-primary/50 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px] text-primary">location_on</span> A-12-04
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 text-center text-lg font-black text-white glow-text">12</td>
+                                    <td class="px-6 py-6 border-none">
+                                        <input class="w-full text-right py-3 px-4 bg-secondary/10 border border-secondary/30 rounded-xl text-secondary font-bold focus:ring-2 focus:ring-secondary focus:bg-secondary/20 transition-all custom-scrollbar outline-none shadow-glow-secondary" type="number" value="12"/>
+                                    </td>
+                                </tr>
+                                <!-- Item 2 -->
+                                <tr class="group">
+                                    <td class="px-6 py-6">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-14 h-14 rounded-xl bg-surface-container-high overflow-hidden border border-outline-variant group-hover:border-primary transition-colors">
+                                                <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB1GJsMu4YVSzocj40Rdcg3R4HMxNVaAQ5e0V3lY43ZCgKTOP_Gw2rNA6OK7sHHv6Kxe47SoL0YHWlHpJwFJ9eORln3rcCgdXjl9xDjEpHLbIdyiVbG2vKyY6tqHtygcrJsIYiHDxxksQBX9bwSHjqoHJcMYQtsO5U3Q9AbIy0M0CGceZcf_ExnTiwdw9_AuD8ZCTqxqLMerWd6GjympyU0iAx5LTy7tznae0vzVDqjRVd3Z7f5RUfAkbswgKhGA3sMp-_vuRqJpVO"/>
                                             </div>
-</td>
-<td class="px-4 py-5 text-center font-bold text-on-surface">1</td>
-<td class="px-4 py-5">
-<input class="w-full text-right py-2 px-3 bg-surface-container-low border-none rounded-lg text-primary font-bold focus:ring-1 focus:ring-primary focus:bg-white transition-all" placeholder="0" type="number"/>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-4 py-5">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Branded designer sunglasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvVxHmylKmJa6GHoQmfWbjdnESZjd74ZfguvJuQzYTriMFOzeBJp06cWcBdXUhXYG1tXP5uR4r9tQo57Sxvg1nmHV4HNnqaiguT2q0gKcDP9IZdW_JwUPb5toUs0mhMKsZiPQg_IhesfZzW_gILgI1zItJCT8BiFKSbCnbhZING6rQ14WpiNw7WTkrsHPT-zdpQz-WNrMaH-1VJejS2UsrBewLHG44ARe5YUdAsRr4H4Sh_L4GaWt-NqaamOb5LwLjaK9zlE0Be1BA"/>
-</div>
-<div>
-<p class="font-bold text-on-surface">OPT-511-SU</p>
-<p class="text-xs text-on-surface-variant">Polarized Safety Lens</p>
-</div>
-</div>
-</td>
-<td class="px-4 py-5">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-surface-container-highest font-mono text-sm font-bold">
-<span class="material-symbols-outlined text-xs">location_on</span>
-                                                C-18-02
+                                            <div>
+                                                <p class="font-bold text-white text-[15px] group-hover:text-primary transition-colors">HD-PX7-PRO</p>
+                                                <p class="text-xs text-on-surface-variant mt-1 font-medium">Acoustic Over-Ear Units</p>
                                             </div>
-</td>
-<td class="px-4 py-5 text-center font-bold text-on-surface">5</td>
-<td class="px-4 py-5">
-<input class="w-full text-right py-2 px-3 bg-surface-container-low border-none rounded-lg text-primary font-bold focus:ring-1 focus:ring-primary focus:bg-white transition-all" placeholder="0" type="number"/>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- Instructions / Notes Area -->
-<div class="bg-surface-container-low rounded-2xl p-6">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-on-surface-variant">info</span>
-<h4 class="font-bold">Picking Instructions</h4>
-</div>
-<p class="text-on-surface-variant text-sm leading-relaxed">
-                            Fragile items detected in shipment. Use ESD-safe containers for CTR-442-XM. Ensure all items are scanned into the delivery tote before proceeding to the validation stage. Contact shift lead if Bin Location B-04-11 is obstructed.
-                        </p>
-</div>
-</div>
-<!-- Right: Status and Completion -->
-<div class="col-span-4 space-y-6">
-<!-- Progress Card -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant border-opacity-10">
-<h4 class="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-6">Workflow Status</h4>
-<div class="mb-8">
-<div class="flex justify-between items-end mb-3">
-<span class="text-sm font-bold text-on-surface">Picking Completion</span>
-<span class="text-2xl font-bold text-secondary">64%</span>
-</div>
-<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[64%] rounded-full shadow-[0_0_12px_rgba(16,109,32,0.3)]"></div>
-</div>
-<p class="text-xs text-on-surface-variant mt-3 text-right">14 of 22 units picked</p>
-</div>
-<div class="space-y-4 pt-6 border-t border-outline-variant border-opacity-20">
-<div class="flex justify-between text-sm">
-<span class="text-on-surface-variant">Order Number:</span>
-<span class="font-mono font-semibold">ORD-2024-X92</span>
-</div>
-<div class="flex justify-between text-sm">
-<span class="text-on-surface-variant">Client:</span>
-<span class="font-semibold">Aerospace Dynamics Inc.</span>
-</div>
-<div class="flex justify-between text-sm">
-<span class="text-on-surface-variant">Assigned To:</span>
-<div class="flex items-center gap-2">
-<span class="font-semibold">M. Roberts</span>
-<div class="w-2 h-2 rounded-full bg-secondary"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Map/Location Visual -->
-<div class="bg-surface-container-low rounded-2xl overflow-hidden relative group">
-<img class="w-full h-48 object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Stylized top-down warehouse floor plan map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFN3ZVgXHqIhDL5z1ZbSSgQjEnuK3isDPLSI7OX55jp4QcfuhChLAv9OiIEtCf02wFOOefe6639286b3MXlZwOgVMJfELf7lHTD3rLqk-ivkcWf2de31EedqJYWGPO3RqsO4qpt2j61SUUJgf5oKsgIlQ7k0SPEHs0597sgquSl0r0VfJ3sxGvqbeMQTuCBXPQQ0RnjPVmgaxpoKCgeESPRD1m2xoOASmSSGSsNpdYbKA2g9g8flRIPs5JF4OVzUOglQ924JGSydSm"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
-<div class="absolute bottom-4 left-4 right-4">
-<div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-primary text-sm">warehouse</span>
-<span class="text-xs font-bold uppercase tracking-tighter text-on-surface">Sector Alpha-4</span>
-</div>
-<p class="text-[10px] text-on-surface-variant">Currently active picking zone</p>
-</div>
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-<div class="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_15px_rgba(0,53,68,0.5)]"></div>
-</div>
-</div>
-<!-- Primary Actions -->
-<div class="space-y-3">
-<button class="w-full btn-primary-gradient text-on-primary py-4 rounded-xl font-bold flex items-center justify-center gap-3 shadow-lg hover:shadow-primary/20 transition-all">
-<span class="material-symbols-outlined">verified</span>
-                            Validate Delivery
-                        </button>
-<button class="w-full bg-surface-container-high text-primary py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-surface-container-highest transition-all">
-<span class="material-symbols-outlined">pause</span>
-                            Pause Workflow
-                        </button>
-</div>
-<!-- Helper Tip -->
-<div class="p-4 bg-tertiary-fixed rounded-xl border-l-4 border-tertiary flex gap-3">
-<span class="material-symbols-outlined text-tertiary">lightbulb</span>
-<p class="text-xs text-tertiary font-medium">Tip: Use the handheld scanner for batch SKUs to increase picking speed by up to 20%.</p>
-</div>
-</div>
-</div>
-</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 border-none">
+                                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant font-mono text-xs font-bold group-hover:border-primary/50 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px]">location_on</span> B-04-11
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 text-center text-lg font-black text-white glow-text">4</td>
+                                    <td class="px-6 py-6 border-none">
+                                        <input class="w-full text-right py-3 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary font-bold focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none group-hover:border-primary/50" placeholder="0" type="number"/>
+                                    </td>
+                                </tr>
+                                <!-- Item 3 -->
+                                <tr class="group">
+                                    <td class="px-6 py-6">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-14 h-14 rounded-xl bg-surface-container-high overflow-hidden border border-outline-variant group-hover:border-primary transition-colors">
+                                                <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-dr6muNRN5hP3xW_7e3gnkF2kzSt9CBT2e2lOuLYEZdzPJNM6neVBSFm-O9EnzZ5z6rLT__DJte3QljhVcZdO_v19ckS1KaSfzTJDLeT7M2C_XwWj28Yy3ceW8NJN6WKiF_488DXNFi3cPd-N9Njte9Iy_Zop9u2JoNrpvLa4Y8sTypMqPI_1vqgDKT8PLoTpreWSZ2iTC44-95dG29hzHR2D3uqKnqtNAqLV8C3EFatWdA4MV2dXpvL8agJRw962B7Iogpx8L-GA"/>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-white text-[15px] group-hover:text-primary transition-colors">TIM-991-CH</p>
+                                                <p class="text-xs text-on-surface-variant mt-1 font-medium">Precision Chronograph</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 border-none">
+                                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant font-mono text-xs font-bold group-hover:border-primary/50 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px]">location_on</span> A-02-15
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 text-center text-lg font-black text-white glow-text">1</td>
+                                    <td class="px-6 py-6 border-none">
+                                        <input class="w-full text-right py-3 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary font-bold focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none group-hover:border-primary/50" placeholder="0" type="number"/>
+                                    </td>
+                                </tr>
+                                <!-- Item 4 -->
+                                <tr class="group">
+                                    <td class="px-6 py-6">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-14 h-14 rounded-xl bg-surface-container-high overflow-hidden border border-outline-variant group-hover:border-primary transition-colors">
+                                                <img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvVxHmylKmJa6GHoQmfWbjdnESZjd74ZfguvJuQzYTriMFOzeBJp06cWcBdXUhXYG1tXP5uR4r9tQo57Sxvg1nmHV4HNnqaiguT2q0gKcDP9IZdW_JwUPb5toUs0mhMKsZiPQg_IhesfZzW_gILgI1zItJCT8BiFKSbCnbhZING6rQ14WpiNw7WTkrsHPT-zdpQz-WNrMaH-1VJejS2UsrBewLHG44ARe5YUdAsRr4H4Sh_L4GaWt-NqaamOb5LwLjaK9zlE0Be1BA"/>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-white text-[15px] group-hover:text-primary transition-colors">OPT-511-SU</p>
+                                                <p class="text-xs text-on-surface-variant mt-1 font-medium">Polarized Safety Lens</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 border-none">
+                                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant font-mono text-xs font-bold group-hover:border-primary/50 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px]">location_on</span> C-18-02
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-6 text-center text-lg font-black text-white glow-text">5</td>
+                                    <td class="px-6 py-6 border-none">
+                                        <input class="w-full text-right py-3 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary font-bold focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none group-hover:border-primary/50" placeholder="0" type="number"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Instructions / Notes Area -->
+                <div class="glass-panel rounded-2xl p-6 border border-tertiary/20 bg-tertiary/5 relative overflow-hidden group">
+                    <div class="flex items-center gap-3 mb-4 relative z-10">
+                        <span class="material-symbols-outlined text-tertiary">info</span>
+                        <h4 class="font-bold text-white">Picking Instructions</h4>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed relative z-10 font-medium">
+                        Fragile items detected in shipment. Use ESD-safe containers for CTR-442-XM. Ensure all items are scanned into the delivery tote before proceeding to the validation stage. Contact shift lead if Bin Location B-04-11 is obstructed.
+                    </p>
+                    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-tertiary rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                </div>
+            </div>
+
+            <!-- Right: Status and Completion -->
+            <div class="col-span-4 space-y-8">
+                <!-- Progress Card -->
+                <div class="glass-panel rounded-3xl p-8 shadow-soft relative overflow-hidden group hover-lift border-primary/20">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-secondary rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
+
+                    <h4 class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-6 relative z-10 border-b border-outline-variant/50 pb-4">Workflow Progress</h4>
+                    
+                    <div class="mb-8 relative z-10">
+                        <div class="flex justify-between items-end mb-4">
+                            <span class="text-sm font-bold text-white">Total Completion</span>
+                            <span class="text-3xl font-headline font-black text-secondary glow-text">64%</span>
+                        </div>
+                        <div class="h-3 w-full bg-surface-container-high border border-outline-variant rounded-full overflow-hidden shadow-inner">
+                            <div class="h-full bg-gradient-to-r from-emerald-500 to-secondary w-[64%] rounded-full shadow-glow-secondary"></div>
+                        </div>
+                        <p class="text-xs text-on-surface-variant mt-4 text-right font-medium">14 of 22 units picked</p>
+                    </div>
+
+                    <div class="space-y-5 pt-8 border-t border-outline-variant relative z-10">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-on-surface-variant">Order Number</span>
+                            <span class="font-mono font-bold text-white bg-surface-container-high px-2 py-1 rounded">ORD-X92</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-on-surface-variant">Client</span>
+                            <span class="font-bold text-white">Aerospace Dynamics Inc.</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-on-surface-variant">Assigned To</span>
+                            <div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-lg shadow-glow">
+                                <span class="font-bold text-primary">M. Roberts</span>
+                                <div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map/Location Visual -->
+                <div class="glass-panel rounded-3xl overflow-hidden relative group h-56 border-primary/20 shadow-soft">
+                    <img class="w-full h-full object-cover opacity-30 mix-blend-luminosity group-hover:opacity-50 transition-all duration-700 hover:scale-105" data-alt="Stylized top-down warehouse floor plan map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFN3ZVgXHqIhDL5z1ZbSSgQjEnuK3isDPLSI7OX55jp4QcfuhChLAv9OiIEtCf02wFOOefe6639286b3MXlZwOgVMJfELf7lHTD3rLqk-ivkcWf2de31EedqJYWGPO3RqsO4qpt2j61SUUJgf5oKsgIlQ7k0SPEHs0597sgquSl0r0VfJ3sxGvqbeMQTuCBXPQQ0RnjPVmgaxpoKCgeESPRD1m2xoOASmSSGSsNpdYbKA2g9g8flRIPs5JF4OVzUOglQ924JGSydSm"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+                    
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="material-symbols-outlined text-primary text-sm">warehouse</span>
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-primary drop-shadow-[0_0_8px_rgba(99,102,241,0.8)]">Sector Alpha-4</span>
+                        </div>
+                        <p class="text-xs font-semibold text-white drop-shadow-md">Currently active picking zone</p>
+                    </div>
+                    
+                    <!-- Radar Ping -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div class="w-4 h-4 bg-primary rounded-full relative">
+                            <div class="absolute inset-0 bg-primary rounded-full animate-ping shadow-[0_0_20px_rgba(99,102,241,1)]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Actions -->
+                <div class="space-y-4">
+                    <button class="w-full btn-primary-gradient text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover-lift text-[15px]">
+                        <span class="material-symbols-outlined text-[20px]">verified</span> Validate Delivery
+                    </button>
+                    <button class="w-full glass-panel border border-outline-variant hover:border-white transition-colors text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover-lift text-[15px] hover:bg-surface-container-high bg-surface-container-low/50">
+                        <span class="material-symbols-outlined text-[20px]">pause</span> Pause Workflow
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
-</body></html>
+</body>
+</html>
