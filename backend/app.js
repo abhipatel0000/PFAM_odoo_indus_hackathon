@@ -1,12 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 // ── Initialise DB connection pool (tests connection on load) ──
-require('./config/db');
+import './config/db.js';
 
 const app = express();
 
@@ -25,15 +25,23 @@ app.get('/', (req, res) => {
 });
 
 // ── Routes ──
-const authRoutes    = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-const warehouseRoutes = require('./routes/warehouseRoutes');
-const stockLedgerRoutes = require('./routes/stockLedgerRoutes');
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import warehouseRoutes from './routes/warehouseRoutes.js';
+import stockLedgerRoutes from './routes/stockLedgerRoutes.js';
+import receiptRoutes from './routes/receiptRoutes.js';
+import deliveryRoutes from './routes/deliveryRoutes.js';
+import transferRoutes from './routes/transferRoutes.js';
+import adjustmentRoutes from './routes/adjustmentRoutes.js';
 
-app.use('/api/auth',     authRoutes);
-app.use('/api/products', productRoutes);
+app.use('/api/auth',       authRoutes);
+app.use('/api/products',   productRoutes);
 app.use('/api/warehouses', warehouseRoutes);
-app.use('/api/stock', stockLedgerRoutes);
+app.use('/api/stock',      stockLedgerRoutes);
+app.use('/api/receipts',   receiptRoutes);
+app.use('/api/deliveries', deliveryRoutes);
+app.use('/api/transfers',  transferRoutes);
+app.use('/api/adjustments', adjustmentRoutes);
 
 // ── Global error handler ──
 app.use((err, req, res, next) => {
@@ -41,4 +49,4 @@ app.use((err, req, res, next) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
 });
 
-module.exports = app;
+export default app;

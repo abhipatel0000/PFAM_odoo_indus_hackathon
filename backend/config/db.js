@@ -1,12 +1,13 @@
-const mysql = require('mysql2/promise');
-require('dotenv').config();
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Create a connection pool for better performance and concurrency
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'Abhishek@oracle_2005',
+    password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'coreinventory',
     waitForConnections: true,   // Queue requests if all connections are busy
     connectionLimit: 10,     // Max 10 simultaneous connections
@@ -26,4 +27,4 @@ pool.getConnection()
         process.exit(1);
     });
 
-module.exports = pool;
+export default pool;

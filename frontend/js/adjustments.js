@@ -1,2 +1,4 @@
-// Dummy adjustments.js
-console.log('Dummy adjustments.js loaded');
+export function initAdjustments() {
+    console.log('Initializing Adjustments Module');
+    // Basic implementation for adjustments
+}

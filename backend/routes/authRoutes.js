@@ -1,6 +1,6 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import userModel from '../models/userModel.js';
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
@@ -65,4 +65,4 @@ router.post('/register', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
