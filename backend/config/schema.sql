@@ -1,8 +1,8 @@
 -- CoreInventory Database Schema
 -- Run: mysql -u root -p coreinventory < backend/config/schema.sql
 
-CREATE DATABASE IF NOT EXISTS coreinventory;
-USE coreinventory;
+-- CREATE DATABASE IF NOT EXISTS coreinventory;
+-- USE coreinventory;
 
 -- ─────────────────────────────────────────────
 -- 1. USERS
@@ -229,5 +229,5 @@ INSERT IGNORE INTO categories (id, name) VALUES
 -- bcrypt hash for 'admin123' with salt rounds = 10
 INSERT IGNORE INTO users (id, name, username, email, password_hash, role) VALUES
     (1, 'Admin User', 'admin', 'admin@coreinventory.com',
-     '$2b$10$rQ2zT5kFbGxQm/pQJv6WMOLw.V1VbJvBp5wVxr.ZlZGpU4O4h8m4.',
+     '$2b$10$CHaX/wE.F8yGmYWIjLNRQe0tlof620e.0gNXVquju9CQ4EELusvLy',
      'Manager');

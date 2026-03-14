@@ -1,2 +1,4 @@
-// Dummy transfers.js
-console.log('Dummy transfers.js loaded');
+export function initTransfers() {
+    console.log('Initializing Transfers Module');
+    // Basic implementation for transfers
+}

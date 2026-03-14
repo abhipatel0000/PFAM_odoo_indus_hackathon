@@ -1,5 +1,5 @@
-const pool = require('../config/db');
-const bcrypt = require('bcryptjs');
+import pool from '../config/db.js';
+import bcrypt from 'bcryptjs';
 
 const userModel = {
     /**
@@ -129,4 +129,4 @@ const userModel = {
     }
 };
 
-module.exports = userModel;
+export default userModel;
