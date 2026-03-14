@@ -1,7 +1,8 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel');
-const { generateOTP, getOtpExpiry, isOtpExpired } = require('../utils/otpUtils');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import userModel from '../models/userModel.js';
+import { generateOTP, getOtpExpiry, isOtpExpired } from '../utils/otpUtils.js';
+import db from '../config/db.js';
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
@@ -77,7 +78,7 @@ router.post('/verify-signup', async (req, res) => {
         }
 
         // Re-fetch full user data with OTP fields
-        const [rows] = await require('../config/db').query('SELECT * FROM users WHERE id = ?', [userId]);
+        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [userId]);
         const fullUser = rows[0];
 
         if (!fullUser.otp_code) {
@@ -167,7 +168,7 @@ router.post('/verify-login', async (req, res) => {
             return res.status(400).json({ success: false, message: 'User ID and OTP are required.' });
         }
 
-        const [rows] = await require('../config/db').query('SELECT * FROM users WHERE id = ?', [userId]);
+        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [userId]);
         const user = rows[0];
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found.' });
@@ -254,7 +255,7 @@ router.post('/verify-reset-otp', async (req, res) => {
             return res.status(400).json({ success: false, message: 'User ID and OTP are required.' });
         }
 
-        const [rows] = await require('../config/db').query('SELECT * FROM users WHERE id = ?', [userId]);
+        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [userId]);
         const user = rows[0];
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found.' });
@@ -338,7 +339,7 @@ router.post('/resend-otp', async (req, res) => {
             return res.status(400).json({ success: false, message: 'User ID is required.' });
         }
 
-        const [rows] = await require('../config/db').query('SELECT * FROM users WHERE id = ?', [userId]);
+        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [userId]);
         const user = rows[0];
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found.' });
@@ -365,4 +366,4 @@ router.post('/resend-otp', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

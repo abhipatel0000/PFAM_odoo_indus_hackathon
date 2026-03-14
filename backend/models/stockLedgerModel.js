@@ -130,16 +130,50 @@ const stockLedgerModel = {
     },
 
     /**
-     * Summarize total stock change per type (for dashboard KPIs)
-     * Returns counts of receipts/deliveries/transfers/adjustments
+     * Get comprehensive summary for dashboard KPIs
      */
     async getSummary() {
-        const [rows] = await pool.query(
+        const [kpis] = await pool.query(`
+            SELECT
+                (SELECT COALESCE(SUM(quantity), 0) FROM stock_balance) AS total_stock,
+                (SELECT COALESCE(SUM(ABS(qty_change)), 0) FROM stock_ledger 
+                 WHERE movement_type = 'delivery' AND DATE(created_at) = CURDATE()) AS today_dispense,
+                (SELECT 
+                    CASE WHEN COUNT(*) = 0 THEN 100 ELSE
+                        ROUND(SUM(CASE WHEN status = 'done' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1)
+                    END
+                 FROM (
+                    SELECT status FROM receipts
+                    UNION ALL
+                    SELECT status FROM deliveries
+                    UNION ALL
+                    SELECT status FROM transfers
+                 ) AS all_moves
+                ) AS efficiency,
+                (SELECT
+                    CASE WHEN COUNT(*) = 0 THEN 100 ELSE
+                        ROUND((COUNT(*) - SUM(CASE WHEN sb.quantity <= p.reorder_level THEN 1 ELSE 0 END)) * 100.0 / COUNT(*), 1)
+                    END
+                 FROM products p
+                 LEFT JOIN (
+                    SELECT product_id, SUM(quantity) as quantity 
+                    FROM stock_balance 
+                    GROUP BY product_id
+                 ) sb ON sb.product_id = p.id
+                ) AS system_health
+        `);
+        
+        const [movements] = await pool.query(
             `SELECT movement_type, COUNT(*) AS count, SUM(ABS(qty_change)) AS total_qty
              FROM stock_ledger
+             WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
              GROUP BY movement_type`
         );
-        return rows;
+
+        return {
+            kpis: kpis[0],
+            movements
+        };
     }
 };
 

@@ -37,6 +37,7 @@ import expiryRoutes from './routes/expiryRoutes.js';
 import deadStockRoutes from './routes/deadStockRoutes.js';
 import activityLogRoutes from './routes/activityLogRoutes.js';
 import reorderRoutes from './routes/reorderRoutes.js';
+import alertRoutes from './routes/alertRoutes.js';
 
 app.use('/api/auth',        authRoutes);
 app.use('/api/products',    productRoutes);
@@ -50,6 +51,7 @@ app.use('/api/expiry',      expiryRoutes);
 app.use('/api/dead-stock',  deadStockRoutes);
 app.use('/api/activity',    activityLogRoutes);
 app.use('/api/reorder',     reorderRoutes);
+app.use('/api/alerts',      alertRoutes);
 
 // ── Global error handler ──
 app.use((err, req, res, next) => {

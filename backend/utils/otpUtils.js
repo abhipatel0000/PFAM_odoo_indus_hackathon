@@ -15,4 +15,4 @@ function isOtpExpired(expiresAt) {
     return new Date() > new Date(expiresAt);
 }
 
-module.exports = { generateOTP, getOtpExpiry, isOtpExpired };
+export { generateOTP, getOtpExpiry, isOtpExpired };
