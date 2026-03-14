@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { apiCall } from './api.js';
 
 export function initAuth() {
@@ -8,108 +7,6 @@ export function initAuth() {
     const protectedPages = ['dashboard', 'products', 'deliveries', 'receipts', 'transfers', 'adjustments', 'settings'];
     const path = window.location.pathname;
     const isProtectedPage = protectedPages.some(page => path.includes(page));
-=======
-const apiBase = window.location.origin;
-
-function setLoggedIn(user, token) {
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('user', JSON.stringify(user));
-    if (token) {
-        localStorage.setItem('authToken', token);
-    }
-    window.location.href = 'dashboard.html';
-}
-
-function showLogin() {
-    document.getElementById('loginForm')?.classList.remove('hidden');
-    document.getElementById('signupForm')?.classList.add('hidden');
-    document.getElementById('loginPrompt')?.classList.remove('hidden');
-    document.getElementById('signupPrompt')?.classList.add('hidden');
-}
-
-function showSignup() {
-    document.getElementById('loginForm')?.classList.add('hidden');
-    document.getElementById('signupForm')?.classList.remove('hidden');
-    document.getElementById('loginPrompt')?.classList.add('hidden');
-    document.getElementById('signupPrompt')?.classList.remove('hidden');
-}
-
-document.getElementById('showSignup')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    showSignup();
-});
-
-document.getElementById('showLogin')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    showLogin();
-});
-
-document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-
-    if (!username || !password) {
-        return alert('Please enter both username and password.');
-    }
-
-    try {
-        const res = await fetch(`${apiBase}/api/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
-        });
-
-        const data = await res.json();
-        if (!res.ok) {
-            return alert(data?.message || 'Login failed');
-        }
-
-        setLoggedIn(data.user, data.token);
-    } catch (err) {
-        console.error('Login error', err);
-        alert('Unable to reach server. Please try again later.');
-    }
-});
-
-document.getElementById('signupForm')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const username = document.getElementById('signupUsername').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('signupPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-
-    if (!name || !username || !email || !password) {
-        return alert('Please fill in all fields.');
-    }
-
-    if (password !== confirmPassword) {
-        return alert('Passwords do not match.');
-    }
-
-    try {
-        const res = await fetch(`${apiBase}/api/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, username, email, password, role: 'Inventory Manager' }),
-        });
-
-        const data = await res.json();
-        if (!res.ok) {
-            return alert(data?.message || 'Registration failed');
-        }
-
-        alert('Account created! You can now login.');
-        showLogin();
-    } catch (err) {
-        console.error('Registration error', err);
-        alert('Unable to reach server. Please try again later.');
-    }
-});
->>>>>>> 4f6c2025c38929cb9b7259e87ca8ba3be3091aba
 
     if (isProtectedPage && !path.includes('login.html')) {
         const token = localStorage.getItem('token');
@@ -122,6 +19,38 @@ document.getElementById('signupForm')?.addEventListener('submit', async function
         // Setup logout functionality
         setupLogout();
     }
+
+    // Toggle between login and signup forms if they exist
+    initAuthToggles();
+}
+
+function initAuthToggles() {
+    const showSignup = document.getElementById('showSignup');
+    const showLogin = document.getElementById('showLogin');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const loginPrompt = document.getElementById('loginPrompt');
+    const signupPrompt = document.getElementById('signupPrompt');
+
+    if (showSignup) {
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm?.classList.add('hidden');
+            signupForm?.classList.remove('hidden');
+            loginPrompt?.classList.add('hidden');
+            signupPrompt?.classList.remove('hidden');
+        });
+    }
+
+    if (showLogin) {
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm?.classList.remove('hidden');
+            signupForm?.classList.add('hidden');
+            loginPrompt?.classList.remove('hidden');
+            signupPrompt?.classList.add('hidden');
+        });
+    }
 }
 
 export function initLoginForm() {
@@ -130,35 +59,100 @@ export function initLoginForm() {
 
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
         const loginBtn = e.target.querySelector('button[type="submit"]');
 
         if (username && password) {
             try {
-                loginBtn.disabled = true;
-                loginBtn.textContent = 'Logging in...';
+                if (loginBtn) {
+                    loginBtn.disabled = true;
+                    loginBtn.textContent = 'Logging in...';
+                }
 
                 const response = await apiCall('/auth/login', {
                     method: 'POST',
                     body: JSON.stringify({ username, password })
                 });
 
-                if (response.success && response.token) {
-                    localStorage.setItem('token', response.token);
-                    localStorage.setItem('user', JSON.stringify({ name: username, role: 'Inventory Manager' }));
+                // response format from remote: { user, token } or { success, token, user }
+                // We'll handle both or assume the apiCall handles the success check
+                const token = response.token;
+                const user = response.user || { name: username, role: 'Inventory Manager' };
+
+                if (token) {
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify(user));
                     window.location.href = 'dashboard.html';
                 } else {
-                    alert(response.message || 'Login failed');
+                    alert('Login failed: Invalid response from server');
                 }
             } catch (error) {
                 alert(error.message || 'Unable to connect to server. Please try again.');
             } finally {
-                loginBtn.disabled = false;
-                loginBtn.textContent = 'Login';
+                if (loginBtn) {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Login';
+                }
             }
         } else {
             alert('Please enter credentials');
+        }
+    });
+}
+
+export function initRegistrationForm() {
+    const signupForm = document.getElementById('signupForm');
+    if (!signupForm) return;
+
+    signupForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const username = document.getElementById('signupUsername').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const signupBtn = e.target.querySelector('button[type="submit"]');
+
+        if (!name || !username || !email || !password) {
+            return alert('Please fill in all fields.');
+        }
+
+        if (password !== confirmPassword) {
+            return alert('Passwords do not match.');
+        }
+
+        try {
+            if (signupBtn) {
+                signupBtn.disabled = true;
+                signupBtn.textContent = 'Creating account...';
+            }
+
+            const response = await apiCall('/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({ 
+                    name, 
+                    username, 
+                    email, 
+                    password, 
+                    role: 'Inventory Manager' 
+                })
+            });
+
+            alert('Account created! You can now login.');
+            
+            // Toggle back to login form
+            document.getElementById('showLogin')?.click();
+        } catch (error) {
+            alert(error.message || 'Registration failed. Please try again.');
+        } finally {
+            if (signupBtn) {
+                signupBtn.disabled = false;
+                signupBtn.textContent = 'Create Account';
+            }
         }
     });
 }
@@ -174,3 +168,4 @@ function setupLogout() {
         });
     }
 }
+

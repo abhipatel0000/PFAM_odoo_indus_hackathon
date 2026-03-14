@@ -4,7 +4,7 @@ import { initReceipts } from './receipts.js';
 import { initDeliveries } from './deliveries.js';
 import { initTransfers } from './transfers.js';
 import { initAdjustments } from './adjustments.js';
-import { initAuth, initLoginForm } from './auth.js';
+import { initAuth, initLoginForm, initRegistrationForm } from './auth.js';
 
 // Global initialization
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initAuth();
     } else {
         initLoginForm();
+        initRegistrationForm();
+        initAuth(); // Also call initAuth to setup toggles
     }
 
     // Page-specific initialization
